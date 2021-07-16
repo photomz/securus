@@ -1,0 +1,11 @@
+extend type Mutation {
+  """
+  Internal endpoint to identify citizen
+  Push notification to identified citizen via SNS if mask detected as off - either from edge device or from Rekognition face identificaton
+  Friends punished too if in pair streak or entangled bubble group
+  Assumes caller already uploaded image to S3 bucket
+  Response is throwaway
+  """
+  identifyCitizen(imageUrl: AWSURL!, cameraId: ID!, judgement: Boolean!): Int
+    @aws_iam
+}

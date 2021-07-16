@@ -8,6 +8,7 @@ custom:
     authenticationType: AMAZON_COGNITO_USER_POOLS
     additionalAuthenticationProviders:
       - authenticationType: API_KEY
+      - authenticationType: AWS_IAM
     userPoolConfig:
       awsRegion: ${self:provider.region}
       defaultAction: ALLOW

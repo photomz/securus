@@ -1,0 +1,9 @@
+extend type Query {
+  profile(userId: ID!, privateAccess: Boolean!): UserProfile! @aws_api_key
+}
+
+type UserProfile @aws_api_key {
+  name: String!
+  userId: ID!
+  coinTotal: Int!
+}

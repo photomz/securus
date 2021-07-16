@@ -1,0 +1,5 @@
+type PowerupArsenal @aws_api_key {
+  freeze: Int!
+  x2Coin: Int!
+  x3Coin: Int!
+}

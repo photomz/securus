@@ -1,0 +1,10 @@
+"""
+cameraId registers DeepLens at GPS location, mall floor, etc
+"""
+type Camera @aws_api_key {
+  cameraId: ID!
+  name: String!
+  latitude: String!
+  longitude: String!
+  address: String!
+}

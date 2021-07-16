@@ -121,10 +121,8 @@ const generateLambdaConfig = (
 
       if (
         !relativePath ||
-        !['index.ts', 'index.py'].includes(path.basename(relativePath)) ||
-        !(
-          relativePath.startsWith('src/queries') ||
-          relativePath.startsWith('src/mutations')
+        !['mutation.ts', 'query.ts', 'subscription.ts', 'index.py'].includes(
+          path.basename(relativePath)
         )
       ) {
         return;
@@ -136,7 +134,10 @@ const generateLambdaConfig = (
 
       const pathArr = relativePath.split('/');
       const name = pathArr.slice(-2, -1)[0];
-      const typeName = pathArr[0] === 'mutations' ? 'Mutation' : 'Query';
+      const typeName =
+        pathArr.slice(-1)[0].split('.')[0] === 'mutations'
+          ? 'Mutation'
+          : 'Query';
 
       resourceConfig = {
         [`${capitalise(name)}DataSource`]: describeDataSource(name),

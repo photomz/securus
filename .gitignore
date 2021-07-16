@@ -79,3 +79,4 @@ build/
 .webpack
 
 .env.*
+packages/api/resources/appsync/schema.graphql

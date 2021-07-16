@@ -1,0 +1,13 @@
+"""
+One user appeal.
+appealTime: Date time of appeal submission
+imageUrl: points to public S3 bucket to get image file.
+isTest: Whether the image is testing the juror or indicting the defendant (and training the model)
+appealId: UUID
+"""
+type LoadedAppeal @aws_api_key {
+  imageUrl: AWSURL!
+  appealId: ID!
+  isTest: Boolean!
+  appealTime: AWSDateTime!
+}
