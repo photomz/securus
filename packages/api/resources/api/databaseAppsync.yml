@@ -1,0 +1,13 @@
+Resources:
+  DDBTableDataSource:
+    Type: 'AWS::AppSync::DataSource'
+    Properties:
+      ApiId: ${self:custom.appsyncId}
+      Description: ${self:service}, securus
+      ServiceRoleArn: { Fn::GetAtt: ['AppSyncDynamoDBRole', 'Arn'] }
+      Type: AMAZON_DYNAMODB
+      DynamoDBConfig:
+        AwsRegion: ${self:provider.region}
+        TableName:
+          Fn::ImportValue: DDBTableSecurus
+      Name: DDBTable

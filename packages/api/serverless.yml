@@ -1,0 +1,62 @@
+service: securus-api
+
+# Expected --> Configuration warning: unrecognized property 'module'
+# https://github.com/serverless/serverless/issues/8423
+functions: ${file(resources/api/functions.yml)}
+
+resources:
+  - ${file(resources/api/roles.yml)}
+  - ${file(resources/api/appsync.yml)}
+  - ${file(resources/api/databaseAppsync.yml)}
+
+custom:
+  appsyncId: ${file(resources/api/variableResolver.js):appSyncId${self:provider.stage}}
+  # pythonRequirements:
+  #   # call `pip install` inside a container - useful for packages that have native dependencies (scipy et-al)
+  #   dockerizePip: non-linux
+
+  #   # aws lambda has an after-extraction size limit - with native dependencies we pass the limit quickly
+  #   # zip the requirements and extract them on the fly (see handler.py)
+  #   zip: true
+  output:
+    file: ./stack.${self:provider.stage}.json
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+package:
+  individually: true
+
+  exclude:
+    # - '__pycache__/**/*'
+    - '*.test.ts'
+    - 'schema.graphql'
+    - 'requirements.txt'
+
+plugins:
+  - serverless-stack-output
+  - serverless-pseudo-parameters
+  - serverless-prune-plugin
+  - serverless-webpack
+  # Open issue makes plugin fail on WSL2 and repo not maintained so fix ourselves
+  # https://github.com/UnitedIncome/serverless-python-requirements/issues/371#issuecomment-668659638
+  # - '../shared/packages/serverless-python-requirements'
+
+provider:
+  name: aws
+  region: ap-southeast-1
+  runtime: nodejs14.x
+  stage: dev
+  lambdaHashingVersion: '20201221'
+  versionFunctions: false
+  endpointType: regional
+  tags:
+    project: securus
+    service: ${self:service}
+    component: cloudformation
+  environment:
+    DDB_TABLE_NAME:
+      Fn::ImportValue: DDBTableSecurus
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+
+frameworkVersion: '>=2.21.0'

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "build",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "noEmitOnError": false,
+    "importHelpers": true,
+    "lib": ["ESNext", "DOM"],
+    "types": ["@types/jest"],
+    "module": "commonjs",
+    "preserveSymlinks": true,
+    "downlevelIteration": true
+  },
+  "exclude": ["node_modules"]
+}

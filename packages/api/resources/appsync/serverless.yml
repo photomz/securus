@@ -1,0 +1,50 @@
+service: securus-appsync
+
+custom:
+  output:
+    file: ./stack.${self:provider.stage}.json
+  appSync:
+    name: ${self:service}
+    authenticationType: AMAZON_COGNITO_USER_POOLS
+    additionalAuthenticationProviders:
+      - authenticationType: API_KEY
+    userPoolConfig:
+      awsRegion: ${self:provider.region}
+      defaultAction: ALLOW
+      userPoolId:
+        Fn::ImportValue: UserPoolId-securus # ../cognito/serverless.yml
+    apiKeys:
+      - name: Session
+        description: React Native client
+        expriresAfter: 365d
+    logConfig:
+      loggingRoleArn: { Fn::GetAtt: [AppSyncLoggingRole, Arn] }
+      level: ERROR
+      excludeVerboseContent: True
+    tags:
+      project: securus
+      service: ${self:service}
+
+resources:
+  - ${file(./roles.yml)}
+
+plugins:
+  - serverless-stack-output
+  - serverless-appsync-plugin
+  # One of these plugins acts up and causes TypeError: Cannot read property 'objectMode' of undefined
+  # https://github.com/serverless/serverless/issues/8837
+  # - serverless-appsync-offline
+  # - serverless-offline
+  # - serverless-dynamodb-local
+
+provider:
+  name: aws
+  region: ap-southeast-1
+  stage: dev
+  lambdaHashingVersion: '20201221'
+  tags:
+    project: securus
+    service: ${self:service}
+    component: cloudformation
+
+frameworkVersion: '>=2.21.0'

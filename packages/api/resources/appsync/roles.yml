@@ -1,0 +1,28 @@
+Resources:
+  AppSyncLoggingRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - 'appsync.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: '${self:service}-appsync-logging-policy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: 'Allow'
+                Action:
+                  - 'cloudwatch:*'
+                Resource:
+                  - '*'
+      Tags:
+        - Key: project
+          Value: securus
+        - Key: service
+          Value: ${self:service}

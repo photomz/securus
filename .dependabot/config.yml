@@ -1,0 +1,10 @@
+# https://dependabot.com/docs/config-file/
+# validate with https://dependabot.com/docs/config-file/validator/
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    directory: '/'
+    update_schedule: 'monthly'
+    version_requirement_updates: 'auto'
+    default_labels:
+      - 'dependencies'
