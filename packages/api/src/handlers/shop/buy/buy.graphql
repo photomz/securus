@@ -1,7 +1,8 @@
 extend type Mutation {
   # User buys an avatar or powerup with price deducted from account.
   # Fails if avatarIds invalid or price too low
+  # Returns HTTP statusCode
 
-  buy(userId: ID!, price: Int!, avatar: Avatar, powerup: Powerup): StockRoom!
+  buy(userId: ID!, price: Int!, avatar: Avatar, powerup: Powerup): Int!
     @aws_api_key
 }
