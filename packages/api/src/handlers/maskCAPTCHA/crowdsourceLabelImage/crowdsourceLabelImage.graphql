@@ -7,7 +7,7 @@ extend type Mutation {
   crowdsourceLabelImage(
     jurorUserId: ID!
     labels: [LabelledImage!]!
-  ): CrowdsourceReward @aws_api_key
+  ): CrowdsourceReward! @aws_api_key
 }
 
 input LabelledImage {
