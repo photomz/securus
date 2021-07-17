@@ -1,0 +1,12 @@
+# Contains all information about a user.
+# Object types are scattered around source, look with HoppScotch.
+
+type Profile implements User @aws_api_key {
+  name: String!
+  userId: ID!
+  leaderboard: LeaderboardRow!
+  bubbleId: ID
+  friends: [Friend!]!
+  arsenal: StockRoom
+  faceIdUrl: AWSURL
+}

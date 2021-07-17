@@ -1,8 +1,0 @@
-extend type Mutation {
-  """
-   Uses AWS Rekognition to tag Face ID of user during setup
-   Assumes user already uploaded image via S3
-  Throwaway response
-  """
-  tagFaceID(userId: ID!, imageUrl: AWSURL!): Int! @aws_api_key
-}

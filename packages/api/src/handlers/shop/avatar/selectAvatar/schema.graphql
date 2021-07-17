@@ -1,6 +1,0 @@
-extend type Mutation {
-  """
-  Select new avatarId from arsenal. Returns new avatarId
-  """
-  selectAvatar(userId: ID!, avatarId: ID!): ID! @aws_api_key
-}

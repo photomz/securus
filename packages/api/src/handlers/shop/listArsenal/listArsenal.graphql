@@ -1,0 +1,6 @@
+extend type Query {
+  # List the shop "arsenal" of a user - aka all the gamification items they own.
+  # Also game data like coin state, etc
+
+  listArsenal(userId: ID!): StockRoom! @aws_api_key
+}

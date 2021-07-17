@@ -1,0 +1,7 @@
+extend type Mutation {
+  # Registers Face ID and creates new user profile
+  # Uses AWS Rekognition to tag Face ID of user during setup
+  # Assumes user already uploaded image via S3
+
+  createProfile(name: String!, faceIdUrl: AWSURL!): Profile! @aws_api_key
+}

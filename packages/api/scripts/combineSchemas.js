@@ -2,11 +2,7 @@ const { writeFile, readFile } = require('fs');
 const { promisify } = require('util');
 const { exec } = require('child_process');
 
-const IN = [
-  './src/queries/**/*.graphql',
-  './src/mutations/**/*.graphql',
-  './src/root.graphql',
-];
+const IN = ['./src/handlers/**/*.graphql', './src/handlers/root.graphql'];
 const OUT = './resources/appsync/schema.graphql';
 
 /**

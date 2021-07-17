@@ -1,0 +1,19 @@
+# Division names ranked from most to least prestigious
+
+enum LeaderboardDivision {
+  JEFFBEZOS
+  FORTUNE500
+  TITANIUM
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+}
+
+type LeaderboardRow @aws_api_key {
+  userId: ID!
+  division: LeaderboardDivision!
+  rank: Int!
+  score: Int!
+  currentStreak: Int!
+}

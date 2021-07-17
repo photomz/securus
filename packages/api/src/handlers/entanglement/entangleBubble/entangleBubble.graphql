@@ -1,0 +1,10 @@
+extend type Mutation {
+  # PUT
+  # Group leader taps their phone to newcomer friend's phone.
+  # Leader phone is receiver, friend phone is sender.
+  # Leader phone triggers mutation with received newcomerId
+  # If newcomer still belongs to a different bubble group, is overwritten as citizens can only be on one group at a time.
+  # If response statusCode 200, successful. 412 means exceeded bubble group size.
+
+  entangleBubble(bubbleId: ID!, newcomerId: ID!): Int! @aws_api_key
+}

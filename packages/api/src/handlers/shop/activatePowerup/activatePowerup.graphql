@@ -1,0 +1,7 @@
+extend type Mutation {
+  # Activate a new powerup. Existing powerup is overwritten.
+  # Currently, powerups last forever once activated.
+
+  activatePowerup(userId: ID!, powerup: Powerup!): ActivatedPowerup!
+    @aws_api_key
+}

@@ -1,0 +1,8 @@
+extend type Query {
+  # Get the profile of any user.
+  # If user is themselves, gives access to private data - arsenal - otherwise null
+  # Gets their position on the leaderboard.
+  # Friend information public, enables profile-hopping
+
+  getProfile(userId: ID!, isMe: Boolean!): Profile! @aws_api_key
+}

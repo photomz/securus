@@ -1,0 +1,6 @@
+extend type Query {
+  # Get all cameras and locations.
+  # Determines user SafeStop proximity and camera map for privacy
+
+  getCameras: [Camera!]! @aws_api_key
+}

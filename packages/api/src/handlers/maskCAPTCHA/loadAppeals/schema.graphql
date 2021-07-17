@@ -1,7 +1,0 @@
-extend type Query {
-  """
-  Randomly load appeals from maskCAPTCHA community feed system.
-  imageCount defaults to 8 images.
-  """
-  loadAppeals(imageCount: Int): [LoadedAppeal!]! @aws_api_key
-}

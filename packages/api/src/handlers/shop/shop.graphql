@@ -1,0 +1,47 @@
+enum Avatar {
+  AZURE_ENGINEER
+  YOUTUBER
+  SAFE_DISTANCING_AMBASSADOR
+  ARTIST
+  AWS_ENGINEER
+}
+
+enum Powerup {
+  FREEZE
+  X2COIN
+  X3COIN
+}
+
+interface StockItem {
+  quantity: Int!
+  price: Int!
+}
+
+type AvatarItem implements StockItem @aws_api_key {
+  name: Avatar!
+  quantity: Int!
+  price: Int!
+}
+
+type PowerupItem implements StockItem @aws_api_key {
+  name: Powerup!
+  quantity: Int!
+  price: Int!
+}
+
+type ActivatedPowerup @aws_api_key {
+  name: Powerup
+  expiresAt: AWSDateTime
+}
+
+# User will always have starting avatar
+# purchaseSuccess only non-null with buy mutation
+
+type StockRoom @aws_api_key {
+  powerups: [PowerupItem!]
+  avatars: [AvatarItem!]!
+  coinTotal: Int!
+  currentAvatar: Avatar!
+  currentPowerup: ActivatedPowerup
+  purchaseSuccess: Boolean
+}

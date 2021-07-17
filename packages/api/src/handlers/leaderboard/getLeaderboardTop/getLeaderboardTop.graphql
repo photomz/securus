@@ -1,0 +1,5 @@
+extend type Query {
+  # Get nTop users on national leaderboard. Defaults to 10.
+
+  getLeaderboardTop(nTop: Int): [LeaderboardRow!]! @aws_api_key
+}

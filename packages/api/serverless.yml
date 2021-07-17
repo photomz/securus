@@ -6,7 +6,8 @@ functions: ${file(resources/api/functions.yml)}
 
 resources:
   - ${file(resources/api/roles.yml)}
-  - ${file(resources/api/appsync.yml)}
+  - ${file(resources/api/dataSources.yml)}
+  - ${file(resources/api/resolvers.yml)}
   - ${file(resources/api/databaseAppsync.yml)}
 
 custom:

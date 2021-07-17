@@ -52,7 +52,7 @@
     "packages/**/*.{js,jsx,ts,tsx}": [
       "eslint packages/ --fix",
       "prettier --write packages/",
-      "git add"
+      "git add ."
     ]
   },
   "husky": {

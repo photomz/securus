@@ -1,7 +1,0 @@
-extend type Mutation {
-  """
-  Defendant submits an appeal for their incrimminating image on S3 imageUrl.
-  Returns generated appealId
-  """
-  submitAppeal(userId: ID!, imageUrl: AWSURL!): ID! @aws_api_key
-}

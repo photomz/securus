@@ -1,0 +1,7 @@
+extend type Mutation {
+  # User buys an avatar or powerup with price deducted from account.
+  # Fails if avatarIds invalid or price too low
+
+  buy(userId: ID!, price: Int!, avatar: Avatar, powerup: Powerup): StockRoom!
+    @aws_api_key
+}

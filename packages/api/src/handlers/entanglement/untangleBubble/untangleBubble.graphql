@@ -1,0 +1,8 @@
+extend type Mutation {
+  # DELETE
+  # Un-entangles a user from their current bubble group.
+  # User may only belong to one bubble group at a time.
+  # Response is HTTP status code
+
+  untangleBubble(userId: ID!): Int! @aws_api_key
+}

@@ -1,0 +1,25 @@
+extend type Mutation {
+  # User action of labelling an array of images with true=mask-on and false=mask-off
+  # User only earns game coins if the test images are all correct/
+  # Test images are already labelled and prevents spam, only training images are actually labelled.
+  # Any appealIds that reached 10 labels get aggregated labels sent to S3 and defendant notified of verdict via SNS
+
+  crowdsourceLabelImage(
+    jurorUserId: ID!
+    labels: [LabelledImage!]!
+  ): CrowdsourceReward @aws_api_key
+}
+
+input LabelledImage {
+  label: Boolean!
+  imageUrl: AWSURL!
+  appealId: ID!
+}
+
+# If community user passes maskCAPTCHA, they will earn coins.
+
+type CrowdsourceReward @aws_api_key {
+  pass: Boolean!
+  coinsEarned: Int!
+  coinTotal: Int!
+}

@@ -1,7 +1,0 @@
-extend type Mutation {
-  """
-  Initiating user makes friend request, which is automatically approved
-  Returns new friend object with paired streak
-  """
-  makeFriend(initiator: User!, newFriend: User!): Friend!
-}

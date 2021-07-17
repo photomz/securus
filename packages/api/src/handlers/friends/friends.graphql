@@ -1,0 +1,12 @@
+type Friend implements User @aws_api_key {
+  userId: ID!
+  name: String!
+  befriendDate: AWSDateTime!
+  pairStreak: Streak!
+}
+
+type Streak @aws_api_key {
+  max: Int!
+  current: Int!
+  isFrozen: Boolean!
+}

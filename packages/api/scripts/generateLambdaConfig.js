@@ -110,8 +110,9 @@ const generateLambdaConfig = (
   // Function executes with script/ dirname, must 'cd' back to root
   searchPath = path.join(__dirname, '..', searchPath);
   writePath = path.join(__dirname, '..', writePath);
-  let functionConfig = {};
-  let resourceConfig = {};
+  const functionConfig = {};
+  const dataSourceConfig = {};
+  const resolverConfig = {};
 
   klaw(searchPath, { filter })
     .on('data', ({ path: absPath }) => {
@@ -135,27 +136,28 @@ const generateLambdaConfig = (
       const pathArr = relativePath.split('/');
       const name = pathArr.slice(-2, -1)[0];
       const typeName =
-        pathArr.slice(-1)[0].split('.')[0] === 'mutations'
+        pathArr.slice(-1)[0].split('.')[0] === 'mutation'
           ? 'Mutation'
           : 'Query';
 
-      resourceConfig = {
-        [`${capitalise(name)}DataSource`]: describeDataSource(name),
-        [`${capitalise(name)}Resolver`]: describeResolver(name, typeName),
-        ...resourceConfig,
-      };
-      functionConfig = {
-        [name]: describeFunction(name, handlerPath, language),
-        ...functionConfig,
-      };
+      dataSourceConfig[`${capitalise(name)}DataSource`] =
+        describeDataSource(name);
+      resolverConfig[`${capitalise(name)}Resolver`] = describeResolver(
+        name,
+        typeName
+      );
+      functionConfig[name] = describeFunction(name, handlerPath, language);
     })
     .on('error', (err, { filepath }) => {
       throw new Error(`At ${filepath}: ${err}`);
     })
     .on('end', async () => {
       await writeYaml(`${writePath}/functions.yml`, functionConfig);
-      await writeYaml(`${writePath}/appsync.yml`, {
-        Resources: resourceConfig,
+      await writeYaml(`${writePath}/dataSources.yml`, {
+        Resources: dataSourceConfig,
+      });
+      await writeYaml(`${writePath}/resolvers.yml`, {
+        Resources: resolverConfig,
       });
     });
 };

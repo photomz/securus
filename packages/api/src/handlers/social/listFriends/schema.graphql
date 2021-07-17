@@ -1,6 +1,0 @@
-extend type Query {
-  """
-  Lists all current friends of given user
-  """
-  listFriends(userId: ID!): [Friend!]!
-}

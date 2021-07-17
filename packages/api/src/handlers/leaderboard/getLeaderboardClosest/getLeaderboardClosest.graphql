@@ -1,0 +1,7 @@
+extend type Query {
+  # Gets nClosest users next to selected user in leaderboard
+  # Defaults to 10
+
+  getLeaderboardClosest(userId: ID!, nClosest: Int): [LeaderboardRow!]!
+    @aws_api_key
+}
