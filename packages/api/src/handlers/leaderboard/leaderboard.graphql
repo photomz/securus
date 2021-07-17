@@ -10,10 +10,12 @@ enum LeaderboardDivision {
   BRONZE
 }
 
+# Rank null if newly-created user
+
 type LeaderboardRow @aws_api_key {
   userId: ID!
   division: LeaderboardDivision!
-  rank: Int!
-  score: Int!
+  rank: Int
+  coinTotal: Int!
   currentStreak: Int!
 }

@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import AWS from 'aws-sdk';
 import 'source-map-support/register';
 

@@ -13,7 +13,7 @@ module.exports = {
     ? 'cheap-module-eval-source-map'
     : 'source-map',
   resolve: {
-    extensions: ['.mjs', '.json', '.ts'],
+    extensions: ['.mjs', '.json', '.ts', '.js'],
     symlinks: false,
     cacheWithContext: false,
     plugins: [
@@ -21,6 +21,7 @@ module.exports = {
         configFile: './tsconfig.json', // Webpack is run from the service/ folder level
       }),
     ],
+    modules: ['node_modules', '../../node_modules'],
   },
   output: {
     libraryTarget: 'commonjs',
