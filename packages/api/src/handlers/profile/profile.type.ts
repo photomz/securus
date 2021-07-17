@@ -9,6 +9,6 @@ export interface Profile extends User {
   leaderboard: LeaderboardRow;
   bubbleId?: ID;
   friends: Friend[];
-  arsenal?: StockRoom;
+  arsenal: StockRoom;
   faceIdUrl?: AWSURL;
 }

@@ -147,7 +147,7 @@ type Profile implements User @aws_api_key {
   leaderboard: LeaderboardRow!
   bubbleId: ID
   friends: [Friend!]!
-  arsenal: StockRoom
+  arsenal: StockRoom!
   faceIdUrl: AWSURL
 }
 

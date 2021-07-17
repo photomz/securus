@@ -10,7 +10,7 @@ enum LeaderboardDivision {
   BRONZE
 }
 
-# Rank null if newly-created user
+# Rank non-null only if get whole leaderboard
 
 type LeaderboardRow @aws_api_key {
   userId: ID!
