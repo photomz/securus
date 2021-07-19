@@ -107,7 +107,7 @@ type MaskOnReward @aws_api_key {
 
 type Mutation {
   createBubble(user: InputUser!): ID! @aws_api_key
-  entangleBubble(bubbleId: ID!, newcomerId: ID!): Int! @aws_api_key
+  entangleBubble(bubbleId: ID!, newcomer: InputUser!): Int! @aws_api_key
   untangleBubble(userId: ID!): Int! @aws_api_key
   makeFriend(initiator: InputUser!, newFriend: InputUser!): Friend! @aws_api_key
   crowdsourceLabelImage(
