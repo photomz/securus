@@ -71,11 +71,23 @@ typings/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
+# Expo
+__generated__/
+.expo/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
 # Serverless directories
 .serverless/
 stack.json
 stack.*.json
 build/
-.webpack
 
+# Custom
 .env.*
