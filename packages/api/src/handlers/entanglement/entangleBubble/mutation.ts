@@ -27,7 +27,7 @@ export const handler = async (
         {
           Update: {
             TableName: process.env.DDB_TABLE_NAME!,
-            ConditionExpression: 'attribute_exists(sk)',
+            ConditionExpression: 'size(#group) <= 5',
             Key: {
               pk: `BUBBLE#${bubbleId}`,
               sk: 'null',
