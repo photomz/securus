@@ -80,9 +80,9 @@ export const handler = async (
             })
             .promise()
         ).Responses?.map(({ Item }) => {
-          const [friend] = Item.userId.filter(
+          const [friend] = Item.userIds.filter(
             (user) => user.userId !== userId
-          )[0]; // Only return friend's names and ids
+          ); // Only return friend's names and ids
           return {
             ...Item,
             userId: friend.userId,

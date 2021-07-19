@@ -18,7 +18,7 @@ export const handler = async (
       current: 0,
       isFrozen: false, // NOTE: For now isFrozen is static and inactive
     },
-    befriendDate: new Date(),
+    befriendDate: new Date().toISOString(),
   };
 
   await docClient
