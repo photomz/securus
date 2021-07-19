@@ -106,7 +106,7 @@ type MaskOnReward @aws_api_key {
 }
 
 type Mutation {
-  createBubble(userId: ID!): ID! @aws_api_key
+  createBubble(user: InputUser!): ID! @aws_api_key
   entangleBubble(bubbleId: ID!, newcomerId: ID!): Int! @aws_api_key
   untangleBubble(userId: ID!): Int! @aws_api_key
   makeFriend(initiator: InputUser!, newFriend: InputUser!): Friend! @aws_api_key

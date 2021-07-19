@@ -1,4 +1,4 @@
-import { AWSDateTime, ID } from '../root.type';
+import { AWSDateTime, ID, User } from '../root.type';
 
 export type Streak = {
   max: number;

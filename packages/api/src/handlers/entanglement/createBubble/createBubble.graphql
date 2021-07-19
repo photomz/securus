@@ -3,5 +3,5 @@ extend type Mutation {
   # Excursion group "leader" or initiator taps "New Bubble Group" button.
   # Adds leader to bubbleId. Leader then taps his phone with friends' phones, which triggers entangleBubbleGroup.
 
-  createBubble(userId: ID!): ID! @aws_api_key
+  createBubble(user: InputUser!): ID! @aws_api_key
 }
