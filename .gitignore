@@ -91,3 +91,5 @@ build/
 
 # Custom
 .env.*
+.webpack
+__generated__
