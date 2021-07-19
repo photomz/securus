@@ -1,0 +1,11 @@
+{
+	"extends": ["../../.eslintrc", "airbnb", "airbnb/hooks"],
+	"overrides": [ 
+		{
+			"files": ["*.jsx"],
+			"rules": {
+				"no-use-before-define": 0
+			}
+		}
+	]
+}

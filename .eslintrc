@@ -14,8 +14,7 @@
   },
   "extends": [
     "eslint:recommended",
-    "airbnb",
-    "airbnb/hooks",
+    "airbnb-base",
     "plugin:jest/recommended",
     "prettier"
   ],
@@ -26,12 +25,6 @@
     "import/no-extraneous-dependencies": 0
   },
   "overrides": [
-    {
-      "files": ["*.jsx"],
-      "rules": {
-        "no-use-before-define": 0
-      }
-    },
     {
       "files": ["*.ts", "*.tsx"],
       "parser": "@typescript-eslint/parser",
