@@ -15,4 +15,5 @@ export type LeaderboardRow = {
   rank?: number;
   coinTotal: number;
   currentStreak: number;
+  name: string;
 };

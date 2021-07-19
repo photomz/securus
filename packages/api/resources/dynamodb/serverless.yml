@@ -18,6 +18,23 @@ resources:
             AttributeType: S
           - AttributeName: sk
             AttributeType: S
+          - AttributeName: coinTotal
+            AttributeType: N
+        GlobalSecondaryIndexes:
+          - IndexName: LeaderboardIndex
+            KeySchema:
+              - AttributeName: sk
+                KeyType: HASH
+              - AttributeName: coinTotal
+                KeyType: RANGE
+            Projection:
+              ProjectionType: INCLUDE
+              NonKeyAttributes:
+                - pk
+                - division
+                - name
+                - userId
+                - currentStreak
         Tags:
           - Key: project
             Value: securus

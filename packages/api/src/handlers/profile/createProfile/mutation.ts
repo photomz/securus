@@ -20,6 +20,7 @@ export const handler = async (
       division: 'BRONZE' as LeaderboardDivision,
       currentStreak: 0,
       userId,
+      name,
     },
     bubbleId: '',
     friends: [],
@@ -73,7 +74,6 @@ export const handler = async (
             Item: {
               pk: `USER#${userId}`,
               sk: 'leaderboard',
-              name,
               ...newProfile.leaderboard,
             },
           },

@@ -91,6 +91,7 @@ type LeaderboardRow @aws_api_key {
   rank: Int
   coinTotal: Int!
   currentStreak: Int!
+  name: String!
 }
 
 type LoadedAppeal @aws_api_key {
