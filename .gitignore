@@ -63,8 +63,6 @@ typings/
 # next.js build output
 .next
 
-.DS_Store
-
 # Elastic Beanstalk Files
 .ebextensions/
 .elasticbeanstalk/*
@@ -92,4 +90,3 @@ build/
 # Custom
 .env.*
 .webpack
-__generated__
