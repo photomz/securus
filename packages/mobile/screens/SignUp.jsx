@@ -24,7 +24,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 /* prettier-ignore */
 function Dialog({
-  header, body, isOpen, leastDestructiveRef, onClose 
+  header, body, isOpen, leastDestructiveRef, onClose
 }) {
   return (
     <Center>
