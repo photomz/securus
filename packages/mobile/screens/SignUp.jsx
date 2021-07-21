@@ -24,12 +24,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 /* prettier-ignore */
 function Dialog({
-  header, body, isOpen, leastDestructiveRef, onClose
+  header, body, isOpen, onClose
 }) {
   return (
     <Center>
       <AlertDialog
-        leastDestructiveRef={leastDestructiveRef}
         isOpen={isOpen}
         onClose={onClose}
         motionPreset="fade"
@@ -40,7 +39,7 @@ function Dialog({
           </AlertDialog.Header>
           <AlertDialog.Body>{body}</AlertDialog.Body>
           <AlertDialog.Footer>
-            <Button ref={leastDestructiveRef} onPress={onClose}>
+            <Button onPress={onClose}>
               Dismiss
             </Button>
           </AlertDialog.Footer>
@@ -57,11 +56,9 @@ export default function SignUp() {
 
   /* prettier-ignore */
   const [operationCancelledDialog, setOperationCancelledDialog] = useState(false);
-  const operationCancelledCancelRef = React.useRef();
 
   /* prettier-ignore */
   const [missingPermissionsDialog, setMissingPermissionsDialog] = useState(false);
-  const missingPermissionsCancelRef = React.useRef();
 
   async function takeSelfie() {
     if (Constants.platform.ios) {
@@ -177,14 +174,12 @@ export default function SignUp() {
         body="Please take a selfie to continue with the sign up process."
         isOpen={operationCancelledDialog}
         onClose={() => setOperationCancelledDialog(false)}
-        leastDestructiveRef={operationCancelledCancelRef}
       />
       <Dialog
         header="Missing Permissions"
         body="Please allow the app to have access to camera permissions."
         isOpen={missingPermissionsDialog}
         onClose={() => setMissingPermissionsDialog(false)}
-        leastDestructiveRef={missingPermissionsCancelRef}
       />
     </Box>
   );
