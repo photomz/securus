@@ -1,18 +1,31 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './Login';
 import SignUp from './SignUp';
 
-const AppStack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function userIsLoggedIn() {
+  return true;
+}
 
 export default function Securus() {
   return (
     <NavigationContainer>
-      <AppStack.Navigator screenOptions={{ headerShown: true }}>
-        <AppStack.Screen name="Login" component={Login} />
-        <AppStack.Screen name="Sign Up" component={SignUp} />
-      </AppStack.Navigator>
+      {userIsLoggedIn() ? (
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={Login} />
+          <Tab.Screen name="Settings" component={SignUp} />
+        </Tab.Navigator>
+      ) : (
+        <Stack.Navigator screenOptions={{ headerShown: true }}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Sign Up" component={SignUp} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 }
