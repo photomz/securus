@@ -11,7 +11,7 @@ const HomeStack = createStackNavigator();
 
 export default function AppStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: true }}>
+    <Stack.Navigator>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Sign Up" component={SignUp} />
     </Stack.Navigator>
@@ -20,8 +20,14 @@ export default function AppStack() {
 
 export function HomePage() {
   return (
-    <HomeStack.Navigator screenOptions={{ headerShown: true }}>
-      <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+        }}
+      />
       <HomeStack.Screen name="Shop" component={Shop} />
       <HomeStack.Screen name="Friends" component={Friends} />
     </HomeStack.Navigator>
