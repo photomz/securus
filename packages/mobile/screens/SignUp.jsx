@@ -7,10 +7,8 @@ import {
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Constants from 'expo-constants';
 import {
-  AlertDialog,
   Box,
   Button,
-  Center,
   FormControl,
   Heading,
   Icon,
@@ -21,33 +19,7 @@ import {
 } from 'native-base';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-/* prettier-ignore */
-function Dialog({
-  header, body, isOpen, onClose
-}) {
-  return (
-    <Center>
-      <AlertDialog
-        isOpen={isOpen}
-        onClose={onClose}
-        motionPreset="fade"
-      >
-        <AlertDialog.Content>
-          <AlertDialog.Header fontSize="lg" fontWeight="bold">
-            {header}
-          </AlertDialog.Header>
-          <AlertDialog.Body>{body}</AlertDialog.Body>
-          <AlertDialog.Footer>
-            <Button onPress={onClose}>
-              Dismiss
-            </Button>
-          </AlertDialog.Footer>
-        </AlertDialog.Content>
-      </AlertDialog>
-    </Center>
-  );
-}
+import Dialog from '../components/Dialog';
 
 // function uploadToS3() {}
 
