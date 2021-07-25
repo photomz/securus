@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AppSyncResolverEvent } from 'aws-lambda';
-import { AWSURL, ID } from 'src/handlers/root.type';
+import { ID } from 'src/handlers/root.type';
 import { docClient, rekognition, ses } from '@libs/setup';
-import { Profile } from '../profile.type';
 
 const OVERRIDE_EDGE_PREDICTION = true; // Last resort of DeepLens edge model doesn't work - use Rekognition PPE instead
 
