@@ -2,5 +2,5 @@ extend type Mutation {
   # Defendant submits an appeal for their incrimminating image on S3 imageUrl.
   # Returns generated appealId
 
-  submitAppeal(user: InputUser!, imageUrl: AWSURL!): ID! @aws_api_key
+  submitAppeal(user: InputUser!, imageUrl: AWSURL!): ID! @aws_cognito_user_pools
 }

@@ -17,19 +17,19 @@ interface StockItem {
   price: Int!
 }
 
-type AvatarItem implements StockItem @aws_api_key {
+type AvatarItem implements StockItem @aws_cognito_user_pools {
   name: Avatar!
   quantity: Int!
   price: Int!
 }
 
-type PowerupItem implements StockItem @aws_api_key {
+type PowerupItem implements StockItem @aws_cognito_user_pools {
   name: Powerup!
   quantity: Int!
   price: Int!
 }
 
-type ActivatedPowerup @aws_api_key {
+type ActivatedPowerup @aws_cognito_user_pools {
   name: Powerup
   expiresAt: AWSDateTime
 }
@@ -37,7 +37,7 @@ type ActivatedPowerup @aws_api_key {
 # User will always have starting avatar
 # purchaseSuccess only non-null with buy mutation
 
-type StockRoom @aws_api_key {
+type StockRoom @aws_cognito_user_pools {
   powerups: [PowerupItem!]
   avatars: [AvatarItem!]!
   coinTotal: Int!

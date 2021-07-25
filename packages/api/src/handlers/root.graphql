@@ -10,7 +10,7 @@ interface User {
   name: String!
 }
 
-type AnyUser implements User @aws_api_key {
+type AnyUser implements User @aws_cognito_user_pools {
   userId: ID!
   name: String!
 }
@@ -90,6 +90,7 @@ directive @aws_publish(subscriptions: [String]) on FIELD_DEFINITION
 
 # Directs the schema to enforce authorization on a field
 # List of cognito user pool groups which have access on this field
+# Difference between @aws_auth and @aws_cognito_user_pools: https://stackoverflow.com/a/61099558/10243889
 
 directive @aws_auth(cognito_groups: [String]) on FIELD_DEFINITION
 

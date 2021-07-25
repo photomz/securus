@@ -2,10 +2,11 @@ extend type Query {
   # Get latest incriminating images of a user.
   # Queried when user clicks on SNS notification of mask-off
 
-  getIncriminatingImage(userId: ID!): IncriminatingImage! @aws_api_key
+  getIncriminatingImage(userId: ID!): IncriminatingImage!
+    @aws_cognito_user_pools
 }
 
-type IncriminatingImage @aws_api_key {
+type IncriminatingImage @aws_cognito_user_pools {
   captureTime: AWSDateTime!
   imageUrl: AWSURL!
   camera: Camera!

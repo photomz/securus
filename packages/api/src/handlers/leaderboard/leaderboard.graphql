@@ -12,7 +12,7 @@ enum LeaderboardDivision {
 
 # Rank non-null only if get whole leaderboard
 
-type LeaderboardRow @aws_api_key {
+type LeaderboardRow @aws_cognito_user_pools {
   userId: ID!
   division: LeaderboardDivision!
   rank: Int

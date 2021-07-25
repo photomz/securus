@@ -2,5 +2,5 @@ extend type Query {
   # GET
   # Get userIds and names associated with a bubble group.
 
-  getBubble(bubbleId: ID!): [AnyUser!]! @aws_api_key
+  getBubble(bubbleId: ID!): [AnyUser!]! @aws_cognito_user_pools
 }

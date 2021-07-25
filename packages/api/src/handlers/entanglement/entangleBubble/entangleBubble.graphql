@@ -6,5 +6,6 @@ extend type Mutation {
   # If newcomer still belongs to a different bubble group, is overwritten as citizens can only be on one group at a time.
   # If response statusCode 200, successful. 412 means exceeded bubble group size.
 
-  entangleBubble(bubbleId: ID!, newcomer: InputUser!): Int! @aws_api_key
+  entangleBubble(bubbleId: ID!, newcomer: InputUser!): Int!
+    @aws_cognito_user_pools
 }

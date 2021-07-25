@@ -2,12 +2,13 @@ extend type Mutation {
   # Automatic mutation in background when user walks near any camera
   # Friends rewarded too if in pair streak or entangled bubble group
 
-  earnCoins(userId: ID!, nearCameraId: ID!): MaskOnReward! @aws_api_key
+  earnCoins(userId: ID!, nearCameraId: ID!): MaskOnReward!
+    @aws_cognito_user_pools
 }
 
 # coinsEarned is deterministic
 
-type MaskOnReward @aws_api_key {
+type MaskOnReward @aws_cognito_user_pools {
   coinsEarned: Int!
   coinTotal: Int!
   currentStreak: Int!

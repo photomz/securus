@@ -36,7 +36,7 @@ Amplify.configure({
 
 const appSyncSettings = {
   auth: {
-    type: 'API_KEY',
+    type: 'AMAZON_COGNITO_USER_POOLS',
     jwtToken: Auth.currentSession().then(
       (session) =>
         console.log(session) || session.getAccessToken().getJwtToken()

@@ -1,5 +1,5 @@
 extend type Query {
   # Lists all current friends of given user
 
-  listFriends(userId: ID!): [Friend!]! @aws_api_key
+  listFriends(userId: ID!): [Friend!]! @aws_cognito_user_pools
 }

@@ -1,5 +1,5 @@
 extend type Mutation {
   # Select new avatarId from arsenal. Returns new avatarId
 
-  selectAvatar(userId: ID!, avatar: Avatar!): Avatar! @aws_api_key
+  selectAvatar(userId: ID!, avatar: Avatar!): Avatar! @aws_cognito_user_pools
 }

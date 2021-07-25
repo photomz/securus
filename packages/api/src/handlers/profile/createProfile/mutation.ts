@@ -1,6 +1,5 @@
 import { AppSyncResolverEvent } from 'aws-lambda';
-import { v4 as uuid } from 'uuid';
-import { AWSURL } from 'src/handlers/root.type';
+import { AWSURL, ID } from 'src/handlers/root.type';
 import { docClient } from '@libs/setup';
 import { LeaderboardDivision } from 'src/handlers/leaderboard/leaderboard.type';
 import { Avatar, avatars, powerups } from 'src/handlers/shop/shop.type';
@@ -9,9 +8,8 @@ import { Profile } from '../profile.type';
 export const handler = async (
   event: AppSyncResolverEvent<Arguments>
 ): Promise<Profile> => {
-  const { name, faceIdUrl } = event.arguments;
+  const { userId, name, faceIdUrl } = event.arguments;
 
-  const userId = uuid();
   const newProfile = {
     name,
     userId,
@@ -96,4 +94,4 @@ export const handler = async (
   return newProfile;
 };
 
-export type Arguments = { name: string; faceIdUrl: AWSURL };
+export type Arguments = { userId: ID; name: string; faceIdUrl: AWSURL };

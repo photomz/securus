@@ -4,5 +4,5 @@ extend type Query {
   # Gets their position on the leaderboard.
   # Friend information public, enables profile-hopping
 
-  getProfile(userId: ID!, isMe: Boolean!): Profile! @aws_api_key
+  getProfile(userId: ID!, isMe: Boolean!): Profile! @aws_cognito_user_pools
 }

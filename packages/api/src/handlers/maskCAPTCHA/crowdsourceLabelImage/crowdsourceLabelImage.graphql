@@ -7,7 +7,7 @@ extend type Mutation {
   crowdsourceLabelImage(
     jurorUserId: ID!
     labels: [LabelledImage!]!
-  ): CrowdsourceReward! @aws_api_key
+  ): CrowdsourceReward! @aws_cognito_user_pools
 }
 
 input LabelledImage {
@@ -18,7 +18,7 @@ input LabelledImage {
 
 # If community user passes maskCAPTCHA, they will earn coins.
 
-type CrowdsourceReward @aws_api_key {
+type CrowdsourceReward @aws_cognito_user_pools {
   pass: Boolean!
   coinsEarned: Int!
   coinTotal: Int!

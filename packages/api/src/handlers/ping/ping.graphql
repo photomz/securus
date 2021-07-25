@@ -1,9 +1,9 @@
 extend type Query {
   # Test GraphQL API connection. Sanity check.
 
-  ping(ping: String!): Pong! @aws_api_key
+  ping(ping: String!): Pong! @aws_cognito_user_pools
 }
 
-type Pong @aws_api_key {
+type Pong @aws_cognito_user_pools {
   pong: String!
 }

@@ -5,12 +5,12 @@ schema {
   mutation: Mutation
 }
 
-type ActivatedPowerup @aws_api_key {
+type ActivatedPowerup @aws_cognito_user_pools {
   name: Powerup
   expiresAt: AWSDateTime
 }
 
-type AnyUser implements User @aws_api_key {
+type AnyUser implements User @aws_cognito_user_pools {
   userId: ID!
   name: String!
 }
@@ -23,13 +23,13 @@ enum Avatar {
   AWS_ENGINEER
 }
 
-type AvatarItem implements StockItem @aws_api_key {
+type AvatarItem implements StockItem @aws_cognito_user_pools {
   name: Avatar!
   quantity: Int!
   price: Int!
 }
 
-type Camera @aws_api_key {
+type Camera @aws_cognito_user_pools {
   cameraId: ID!
   name: String!
   latitude: String!
@@ -37,13 +37,13 @@ type Camera @aws_api_key {
   address: String!
 }
 
-type CrowdsourceReward @aws_api_key {
+type CrowdsourceReward @aws_cognito_user_pools {
   pass: Boolean!
   coinsEarned: Int!
   coinTotal: Int!
 }
 
-type Defendant implements User @aws_api_key {
+type Defendant implements User @aws_cognito_user_pools {
   userId: ID!
   name: String!
   imageUrl: AWSURL!
@@ -51,14 +51,14 @@ type Defendant implements User @aws_api_key {
   appealTime: AWSDateTime!
 }
 
-type Friend implements User @aws_api_key {
+type Friend implements User @aws_cognito_user_pools {
   userId: ID!
   name: String!
   befriendDate: AWSDateTime!
   pairStreak: Streak!
 }
 
-type IncriminatingImage @aws_api_key {
+type IncriminatingImage @aws_cognito_user_pools {
   captureTime: AWSDateTime!
   imageUrl: AWSURL!
   camera: Camera!
@@ -85,7 +85,7 @@ enum LeaderboardDivision {
   BRONZE
 }
 
-type LeaderboardRow @aws_api_key {
+type LeaderboardRow @aws_cognito_user_pools {
   userId: ID!
   division: LeaderboardDivision!
   rank: Int
@@ -94,39 +94,43 @@ type LeaderboardRow @aws_api_key {
   name: String!
 }
 
-type LoadedAppeal @aws_api_key {
+type LoadedAppeal @aws_cognito_user_pools {
   defendant: Defendant!
   isTest: Boolean!
 }
 
-type MaskOnReward @aws_api_key {
+type MaskOnReward @aws_cognito_user_pools {
   coinsEarned: Int!
   coinTotal: Int!
   currentStreak: Int!
 }
 
 type Mutation {
-  createBubble(user: InputUser!): ID! @aws_api_key
-  entangleBubble(bubbleId: ID!, newcomer: InputUser!): Int! @aws_api_key
-  untangleBubble(userId: ID!): Int! @aws_api_key
-  makeFriend(initiator: InputUser!, newFriend: InputUser!): Friend! @aws_api_key
+  createBubble(user: InputUser!): ID! @aws_cognito_user_pools
+  entangleBubble(bubbleId: ID!, newcomer: InputUser!): Int!
+    @aws_cognito_user_pools
+  untangleBubble(userId: ID!): Int! @aws_cognito_user_pools
+  makeFriend(initiator: InputUser!, newFriend: InputUser!): Friend!
+    @aws_cognito_user_pools
   crowdsourceLabelImage(
     jurorUserId: ID!
     labels: [LabelledImage!]!
-  ): CrowdsourceReward! @aws_api_key
-  submitAppeal(user: InputUser!, imageUrl: AWSURL!): ID! @aws_api_key
-  createProfile(name: String!, faceIdUrl: AWSURL!): Profile! @aws_api_key
-  earnCoins(userId: ID!, nearCameraId: ID!): MaskOnReward! @aws_api_key
+  ): CrowdsourceReward! @aws_cognito_user_pools
+  submitAppeal(user: InputUser!, imageUrl: AWSURL!): ID! @aws_cognito_user_pools
+  createProfile(userId: ID!, name: String!, faceIdUrl: AWSURL!): Profile!
+    @aws_cognito_user_pools
+  earnCoins(userId: ID!, nearCameraId: ID!): MaskOnReward!
+    @aws_cognito_user_pools
   identifyCitizen(imageUrl: AWSURL!, cameraId: ID!, judgement: Boolean!): Int!
     @aws_iam
   activatePowerup(userId: ID!, powerup: Powerup!): ActivatedPowerup!
-    @aws_api_key
+    @aws_cognito_user_pools
   buy(userId: ID!, price: Int!, avatar: Avatar, powerup: Powerup): Int!
-    @aws_api_key
-  selectAvatar(userId: ID!, avatar: Avatar!): Avatar! @aws_api_key
+    @aws_cognito_user_pools
+  selectAvatar(userId: ID!, avatar: Avatar!): Avatar! @aws_cognito_user_pools
 }
 
-type Pong @aws_api_key {
+type Pong @aws_cognito_user_pools {
   pong: String!
 }
 
@@ -136,13 +140,13 @@ enum Powerup {
   X3COIN
 }
 
-type PowerupItem implements StockItem @aws_api_key {
+type PowerupItem implements StockItem @aws_cognito_user_pools {
   name: Powerup!
   quantity: Int!
   price: Int!
 }
 
-type Profile implements User @aws_api_key {
+type Profile implements User @aws_cognito_user_pools {
   name: String!
   userId: ID!
   leaderboard: LeaderboardRow!
@@ -153,17 +157,18 @@ type Profile implements User @aws_api_key {
 }
 
 type Query {
-  getBubble(bubbleId: ID!): [AnyUser!]! @aws_api_key
-  listFriends(userId: ID!): [Friend!]! @aws_api_key
+  getBubble(bubbleId: ID!): [AnyUser!]! @aws_cognito_user_pools
+  listFriends(userId: ID!): [Friend!]! @aws_cognito_user_pools
   getLeaderboardClosest(userId: ID!, nClosest: Int): [LeaderboardRow!]!
-    @aws_api_key
-  getLeaderboardTop(nTop: Int): [LeaderboardRow!]! @aws_api_key
-  loadAppeals(imageCount: Int): [LoadedAppeal!]! @aws_api_key
-  ping(ping: String!): Pong! @aws_api_key
-  getProfile(userId: ID!, isMe: Boolean!): Profile! @aws_api_key
-  getCameras: [Camera!]! @aws_api_key
-  getIncriminatingImage(userId: ID!): IncriminatingImage! @aws_api_key
-  listArsenal(userId: ID!): StockRoom! @aws_api_key
+    @aws_cognito_user_pools
+  getLeaderboardTop(nTop: Int): [LeaderboardRow!]! @aws_cognito_user_pools
+  loadAppeals(imageCount: Int): [LoadedAppeal!]! @aws_cognito_user_pools
+  ping(ping: String!): Pong! @aws_cognito_user_pools
+  getProfile(userId: ID!, isMe: Boolean!): Profile! @aws_cognito_user_pools
+  getCameras: [Camera!]! @aws_cognito_user_pools
+  getIncriminatingImage(userId: ID!): IncriminatingImage!
+    @aws_cognito_user_pools
+  listArsenal(userId: ID!): StockRoom! @aws_cognito_user_pools
 }
 
 interface StockItem {
@@ -171,7 +176,7 @@ interface StockItem {
   price: Int!
 }
 
-type StockRoom @aws_api_key {
+type StockRoom @aws_cognito_user_pools {
   powerups: [PowerupItem!]
   avatars: [AvatarItem!]!
   coinTotal: Int!
@@ -180,7 +185,7 @@ type StockRoom @aws_api_key {
   purchaseSuccess: Boolean
 }
 
-type Streak @aws_api_key {
+type Streak @aws_cognito_user_pools {
   max: Int!
   current: Int!
   isFrozen: Boolean!

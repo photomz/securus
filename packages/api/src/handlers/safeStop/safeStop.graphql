@@ -1,6 +1,6 @@
 # cameraId registers DeepLens at GPS location, mall floor, etc
 
-type Camera @aws_api_key {
+type Camera @aws_cognito_user_pools {
   cameraId: ID!
   name: String!
   latitude: String!

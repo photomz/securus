@@ -4,5 +4,5 @@ extend type Mutation {
   # User may only belong to one bubble group at a time.
   # Response is HTTP status code
 
-  untangleBubble(userId: ID!): Int! @aws_api_key
+  untangleBubble(userId: ID!): Int! @aws_cognito_user_pools
 }

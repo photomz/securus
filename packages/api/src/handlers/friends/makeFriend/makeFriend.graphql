@@ -2,5 +2,6 @@ extend type Mutation {
   # Initiating user makes friend request, which is automatically approved
   # Returns new friend object with paired streak at 0
 
-  makeFriend(initiator: InputUser!, newFriend: InputUser!): Friend! @aws_api_key
+  makeFriend(initiator: InputUser!, newFriend: InputUser!): Friend!
+    @aws_cognito_user_pools
 }

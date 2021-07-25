@@ -4,12 +4,12 @@
 # isTest: Whether the image is testing the juror or indicting the defendant (and training the model)
 # appealId: UUID
 
-type LoadedAppeal @aws_api_key {
+type LoadedAppeal @aws_cognito_user_pools {
   defendant: Defendant!
   isTest: Boolean!
 }
 
-type Defendant implements User @aws_api_key {
+type Defendant implements User @aws_cognito_user_pools {
   userId: ID!
   name: String!
   imageUrl: AWSURL!

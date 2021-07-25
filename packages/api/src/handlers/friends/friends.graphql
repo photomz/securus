@@ -1,11 +1,11 @@
-type Friend implements User @aws_api_key {
+type Friend implements User @aws_cognito_user_pools {
   userId: ID!
   name: String!
   befriendDate: AWSDateTime!
   pairStreak: Streak!
 }
 
-type Streak @aws_api_key {
+type Streak @aws_cognito_user_pools {
   max: Int!
   current: Int!
   isFrozen: Boolean!
