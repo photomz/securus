@@ -10,5 +10,5 @@ export interface Profile extends User {
   bubbleId?: ID;
   friends: Friend[];
   arsenal: StockRoom;
-  faceIdUrl?: AWSURL;
+  faceId?: ID;
 }

@@ -58,6 +58,8 @@ provider:
   environment:
     DDB_TABLE_NAME:
       Fn::ImportValue: DDBTableSecurus
+    REKOGNITION_COLLECTION_ID: s3curus
+    S3_LAKE_BUCKET_NAME: s3curus
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
 
 frameworkVersion: '>=2.21.0'

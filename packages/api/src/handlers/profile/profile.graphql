@@ -8,5 +8,5 @@ type Profile implements User @aws_cognito_user_pools {
   bubbleId: ID
   friends: [Friend!]!
   arsenal: StockRoom!
-  faceIdUrl: AWSURL
+  faceId: ID
 }

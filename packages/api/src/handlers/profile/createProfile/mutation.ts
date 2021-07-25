@@ -1,14 +1,36 @@
 import { AppSyncResolverEvent } from 'aws-lambda';
 import { AWSURL, ID } from 'src/handlers/root.type';
-import { docClient } from '@libs/setup';
+import { docClient, rekognition } from '@libs/setup';
 import { LeaderboardDivision } from 'src/handlers/leaderboard/leaderboard.type';
 import { Avatar, avatars, powerups } from 'src/handlers/shop/shop.type';
 import { Profile } from '../profile.type';
+
+const addFace = async (username: string, s3Key?: string): string => {
+  const analysis = await rekognition
+    .indexFaces({
+      CollectionId: process.env.REKOGNITION_COLLECTION_ID!,
+      ExternalImageId: `${username}.jpg`,
+      Image: {
+        S3Object: {
+          Bucket: process.env.S3_LAKE_BUCKET_NAME!,
+          Name: s3Key ?? `public/faceIds/${username}.jpg`,
+        },
+      },
+      MaxFaces: 1,
+    })
+    .promise();
+
+  const faceId = analysis.FaceRecords[0].Face.FaceId;
+
+  return faceId;
+};
 
 export const handler = async (
   event: AppSyncResolverEvent<Arguments>
 ): Promise<Profile> => {
   const { userId, name, faceIdUrl } = event.arguments;
+
+  const faceId = await addFace(userId, faceIdUrl);
 
   const newProfile = {
     name,
@@ -44,7 +66,7 @@ export const handler = async (
       currentPowerup: {},
       coinTotal: 0,
     },
-    faceIdUrl,
+    faceId,
   } as Profile;
 
   await docClient
@@ -61,7 +83,7 @@ export const handler = async (
               bubbleId: '',
               pairIds: [],
               appealIds: [],
-              faceIdUrl,
+              faceId,
             },
           },
         },
@@ -94,4 +116,4 @@ export const handler = async (
   return newProfile;
 };
 
-export type Arguments = { userId: ID; name: string; faceIdUrl: AWSURL };
+export type Arguments = { userId: ID; name: string; faceIdUrl?: AWSURL };

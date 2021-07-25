@@ -6,6 +6,12 @@ const docClient = new AWS.DynamoDB.DocumentClient({
   region: process.env.AWS_REGION,
 });
 
-export { docClient };
+const rekognition = new AWS.Rekognition({ region: process.env.AWS_REGION });
+const ses = new AWS.SES({
+  region: process.env.AWS_REGION,
+  apiVersion: '2010-12-01',
+});
+
+export { docClient, rekognition, ses };
 
 export default {};

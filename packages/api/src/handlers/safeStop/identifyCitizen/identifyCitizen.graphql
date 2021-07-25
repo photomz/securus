@@ -5,6 +5,7 @@ extend type Mutation {
   # Assumes caller already uploaded image to S3 bucket
   # Response is whether successful - mostly throwaway
 
-  identifyCitizen(imageUrl: AWSURL!, cameraId: ID!, judgement: Boolean!): Int!
+  identifyCitizen(imageKey: ID!, cameraId: ID!, judgement: Boolean!): Int!
     @aws_iam
+    @aws_api_key
 }

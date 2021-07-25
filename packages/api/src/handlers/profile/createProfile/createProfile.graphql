@@ -3,7 +3,8 @@ extend type Mutation {
   # Uses AWS Rekognition to tag Face ID of user during setup
   # Uses Cognito username
   # Assumes user already uploaded image via S3
+  # FaceId Url defaults to userId Face ID schema in S3 bucket
 
-  createProfile(userId: ID!, name: String!, faceIdUrl: AWSURL!): Profile!
+  createProfile(userId: ID!, name: String!, faceIdUrl: AWSURL): Profile!
     @aws_cognito_user_pools
 }
