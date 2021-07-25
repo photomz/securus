@@ -10,6 +10,29 @@
       "StackName": "amplify-securus-dev-111446",
       "StackId": "arn:aws:cloudformation:ap-southeast-1:480803351799:stack/amplify-securus-dev-111446/786f6b90-ecf6-11eb-99b7-0af8bd9584f4",
       "AmplifyAppId": "d3fhhj6p6jc7gi"
+    },
+    "categories": {
+      "auth": {
+        "securusd0de2bd4": {
+          "userPoolId": "ap-southeast-1_wKgDSSzFi",
+          "userPoolName": "securus-cognito-dev-user-pool",
+          "webClientId": "najig9u2i5ur5e0qg3d8igqrb",
+          "nativeClientId": "najig9u2i5ur5e0qg3d8igqrb",
+          "identityPoolId": "ap-southeast-1:6719f04a-e96f-4d92-b04f-df76fdb95fd6",
+          "identityPoolName": "securus-cognito-dev-pool",
+          "allowUnauthenticatedIdentities": false,
+          "authRoleArn": "arn:aws:iam::480803351799:role/securus-cognito-dev-CognitoAuthRole-2LKCSDP4CG4G",
+          "authRoleName": "securus-cognito-dev-CognitoAuthRole-2LKCSDP4CG4G",
+          "unauthRoleArn": "arn:aws:iam::480803351799:role/securus-cognito-dev-CognitoUnauthRole-ZPD24ZHG79IB",
+          "unauthRoleName": "securus-cognito-dev-CognitoUnauthRole-ZPD24ZHG79IB"
+        }
+      },
+      "storage": {
+        "securus7d6feb47": {
+          "bucketName": "s3curus",
+          "region": "ap-southeast-1"
+        }
+      }
     }
   }
 }

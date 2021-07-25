@@ -5,11 +5,12 @@ import { getLeaderboardTop as GET_LEADERBOARD_TOP } from '../graphql/queries';
 import { tailwind } from '../styles/tailwind';
 
 export default function Leaderboard() {
+  // eslint-disable-next-line no-unused-vars
   const { data, loading, error } = useQuery(gql(GET_LEADERBOARD_TOP));
 
   if (error) return <Text>Error: {error.message}</Text>;
   if (loading) return <Text>Loading....</Text>;
-  console.log(data);
+
   return (
     <SafeAreaView style={tailwind('h-full')}>
       <View style={tailwind('pt-12 items-center')}>

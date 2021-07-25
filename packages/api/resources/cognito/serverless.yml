@@ -47,6 +47,8 @@ resources:
         Roles:
           authenticated:
             Fn::GetAtt: [CognitoAuthRole, Arn]
+          unauthenticated:
+            Fn::GetAtt: [CognitoUnauthRole, Arn]
 
     # IAM role used for authenticated users
     CognitoAuthRole:
@@ -78,6 +80,93 @@ resources:
                     - 'cognito-sync:*'
                     - 'cognito-identity:*'
                   Resource: '*' # TODO: Filter resources, this is dangerous
+                - Effect: Allow
+                  Action:
+                    - s3:GetObject
+                    - s3:PutObject
+                    - s3:DeleteObject
+                  Resource:
+                    - arn:aws:s3:::s3curus/public/*
+                    - arn:aws:s3:::s3curus/protected/*
+                    - arn:aws:s3:::s3curus/private/*
+                - Action:
+                    - s3:PutObject
+                  Resource:
+                    - arn:aws:s3:::s3curus/uploads/*
+                  Effect: Allow
+                - Action:
+                    - s3:GetObject
+                  Resource:
+                    - arn:aws:s3:::s3curus/protected/*
+                  Effect: Allow
+                - Condition:
+                    StringLike:
+                      s3:prefix:
+                        - public/
+                        - public/*
+                        - protected/
+                        - protected/*
+                        # - private/${cognito-identity.amazonaws.com:sub}/ # TODO: Fix disregard for protection settings
+                        - private/
+                        - private/*
+                  Action:
+                    - s3:ListBucket
+                  Resource:
+                    - arn:aws:s3:::s3curus
+                  Effect: Allow
+        Tags:
+          - Key: project
+            Value: securus
+          - Key: service
+            Value: ${self:service}
+
+    CognitoUnauthRole:
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Principal:
+                Service:
+                  - 's3.amazonaws.com'
+              Action:
+                - 'sts:AssumeRole'
+        Policies:
+          - PolicyName: 'CognitoAuthorizedPolicy'
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Action:
+                    - s3:GetObject
+                    - s3:PutObject
+                    - s3:DeleteObject
+                  Resource:
+                    - arn:aws:s3:::s3curus/public/*
+                  Effect: Allow
+                - Action:
+                    - s3:PutObject
+                  Resource:
+                    - arn:aws:s3:::s3curus/uploads/*
+                  Effect: Allow
+                - Action:
+                    - s3:GetObject
+                  Resource:
+                    - arn:aws:s3:::s3curus/protected/*
+                  Effect: Allow
+                - Condition:
+                    StringLike:
+                      s3:prefix:
+                        - public/
+                        - public/*
+                        - protected/
+                        - protected/*
+                  Action:
+                    - s3:ListBucket
+                  Resource:
+                    - arn:aws:s3:::s3curus
+                  Effect: Allow
         Tags:
           - Key: project
             Value: securus
