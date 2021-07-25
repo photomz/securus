@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "postinstall": "expo-yarn-workspaces postinstall"
+    "postinstall": "expo-yarn-workspaces postinstall",
+    "build:tailwind": "cd ../../node_modules/tailwind-rn && yarn && cd ../../packages/mobile && ../../node_modules/tailwind-rn/cli.js"
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
@@ -17,6 +18,7 @@
     "@react-navigation/bottom-tabs": "^5.11.11",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
+    "autoprefixer": "^10.3.1",
     "aws-amplify": "1.1.7",
     "aws-amplify-react-native": "^5.0.3",
     "aws-appsync": "^4.0.3",
@@ -26,6 +28,7 @@
     "expo-image-picker": "~10.2.2",
     "expo-status-bar": "~1.0.4",
     "native-base": "^3.0.6",
+    "postcss": "^8.3.6",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
@@ -37,7 +40,9 @@
     "react-native-svg": "12.1.1",
     "react-native-web": "~0.13.12",
     "styled-components": "^5.3.0",
-    "styled-system": "^5.1.5"
+    "styled-system": "^5.1.5",
+    "tailwind-rn": "^3.0.1",
+    "tailwindcss": "^2.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
