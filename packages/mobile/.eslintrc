@@ -1,13 +1,8 @@
 {
-  "extends": ["../../.eslintrc", "airbnb", "airbnb/hooks"],
-  "overrides": [
-    {
-      "files": ["*.jsx"],
-      "rules": {
-        "comma-dangle": 0,
-        "react/prop-types": 0,
-        "jsx-a11y/anchor-is-valid": 0
-      }
-    }
-  ]
+  "extends": ["airbnb","airbnb/hooks","@react-native-community"],
+  "root": true,
+  "rules": {
+    "comma-dangle": "off",
+  "jsx-a11y/anchor-is-valid": "off"
+  }
 }

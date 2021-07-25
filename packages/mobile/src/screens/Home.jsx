@@ -29,7 +29,7 @@ export default function Home() {
         LG
       </Avatar>
       <Text bold fontSize="xl" mt={2}>
-        We Bare Bears
+        We Eat Bears
       </Text>
       <Button
         mt={10}

@@ -42,20 +42,16 @@ export default function SignUp() {
       }
     }
 
-    try {
-      const { cancelled, uri } = await launchCameraAsync({
-        allowsEditing: true,
-        exif: false,
-      });
+    const { cancelled, uri } = await launchCameraAsync({
+      allowsEditing: true,
+      exif: false,
+    });
 
-      if (cancelled) {
-        setOperationCancelledDialog(true);
-      }
-
-      setImage(uri);
-    } catch {
-      /* eslint-disable-line no-empty */
+    if (cancelled) {
+      setOperationCancelledDialog(true);
     }
+
+    setImage(uri);
   }
 
   return (

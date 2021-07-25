@@ -2,13 +2,14 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { withAuthenticator } from 'aws-amplify-react-native';
 import Feed from '../screens/Feed';
 import { HomePage } from './Stack';
 import Leaderboard from '../screens/Leaderboard';
 
 const Tab = createBottomTabNavigator();
 
-export default function Tabs() {
+function Tabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -35,3 +36,5 @@ export default function Tabs() {
     </Tab.Navigator>
   );
 }
+
+export default withAuthenticator(Tabs);

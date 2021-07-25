@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-securus-dev-111446-authRole",
+      "UnauthRoleArn": "arn:aws:iam::480803351799:role/amplify-securus-dev-111446-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::480803351799:role/amplify-securus-dev-111446-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-securus-dev-111446-deployment",
+      "UnauthRoleName": "amplify-securus-dev-111446-unauthRole",
+      "StackName": "amplify-securus-dev-111446",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:480803351799:stack/amplify-securus-dev-111446/786f6b90-ecf6-11eb-99b7-0af8bd9584f4",
+      "AmplifyAppId": "d3fhhj6p6jc7gi"
+    }
+  }
+}

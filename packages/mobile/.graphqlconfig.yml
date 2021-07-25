@@ -1,0 +1,18 @@
+projects:
+  securus-appsync:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
+        region: ap-southeast-1
+        apiId: epsan7nkerdftovejzt44oj7hm
+        maxDepth: 5
+extensions:
+  amplify:
+    version: 3

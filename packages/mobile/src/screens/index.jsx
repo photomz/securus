@@ -10,11 +10,7 @@ function userIsLoggedIn() {
 export default function Securus() {
   return (
     <NavigationContainer>
-      {userIsLoggedIn() ? (
-        <Tabs />
-      ) : (
-        <Stacks />
-      )}
+      {userIsLoggedIn() ? <Tabs /> : <Stacks />}
     </NavigationContainer>
   );
 }
