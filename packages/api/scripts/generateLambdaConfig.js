@@ -82,6 +82,7 @@ const describeFunction = (funcName, funcPath, funcLang) => ({
       }
     : {
         handler: funcPath,
+        memorySize: 256,
       }),
   role: {
     'Fn::GetAtt': ['LambdaRole', 'Arn'],

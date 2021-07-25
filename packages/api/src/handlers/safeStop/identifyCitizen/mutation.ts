@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AppSyncResolverEvent } from 'aws-lambda';
 import { AWSURL, ID } from 'src/handlers/root.type';
@@ -6,7 +7,19 @@ import { Profile } from '../profile.type';
 
 const OVERRIDE_EDGE_PREDICTION = true; // Last resort of DeepLens edge model doesn't work - use Rekognition PPE instead
 
-const sendEmail = async (recipient, message, subject) => {
+const sendEmail = async (recipient, name) => {
+  const message = `
+    Dear ${name},
+
+    Whoops! It seems you forgot to wear a mask recently.
+
+    Don't worry, you won't face any fines - it's all completely understandable. You lost a few in-game, virtual points is all.
+
+    If Securus made a mistake, please open the app and appeal to our helpful and dedicated community. We're always trying to make Securus better!
+
+    Best wishes,
+    The Securus Team
+  `;
   const response = await ses
     .sendEmail({
       Destination: {
@@ -41,7 +54,7 @@ const sendEmail = async (recipient, message, subject) => {
           Data: 'A Gentle Reminder 😊',
         },
       },
-      Source: subject /* required */,
+      Source: 'markuszhang8@gmail.com' /* required */,
       ReplyToAddresses: [
         'markuszhang8@gmail.com',
         /* more items */
@@ -51,20 +64,52 @@ const sendEmail = async (recipient, message, subject) => {
 
   return response.MessageId;
 };
-// const message = `
-// Dear Markus,
 
-// Whoops! It seems you forgot to wear a mask recently.
+const getAddressor = async (userIds) => {
+  const response = await docClient
+    .transactGet({
+      TransactItems: userIds.map((userId) => ({
+        Get: {
+          TableName: 'securus-dynamodb-dev-0.1.0',
+          Key: {
+            pk: `USER#${userId}`,
+            sk: 'profile',
+          },
+          ExpressionAttributeNames: {
+            '#name': 'name',
+          },
+          ProjectionExpression: '#name, email',
+        },
+      })),
+    })
+    .promise();
 
-// Don't worry, you won't face any fines - it's all completely understandable. You lost a few in-game, virtual points is all.
+  return response.Responses.map((item) => ({
+    name: item.Item.name,
+    email: item.Item.email,
+  }));
+};
 
-// If Securus made a mistake, please open the app and appeal to our helpful and dedicated community. We're always trying to make Securus better!
-
-// Best wishes,
-// The Securus Team
-// `;
-
-// sendEmail('markuszhang8@gmail.com', message);
+const deductGamePoints = async (userIds) => {
+  const response = await docClient
+    .transactWrite({
+      TransactItems: userIds.map((userId) => ({
+        Update: {
+          TableName: process.env.DDB_TABLE_NAME!,
+          Key: {
+            pk: `USER#${userId}`,
+            sk: 'leaderboard',
+          },
+          ExpressionAttributeValues: {
+            ':0': 0,
+          },
+          UpdateExpression: 'SET currentStreak = :0',
+        },
+      })),
+    })
+    .promise();
+  return response;
+};
 
 const identifyFaces = async (s3Key) => {
   const analysis = await rekognition
@@ -74,6 +119,7 @@ const identifyFaces = async (s3Key) => {
       Image: {
         S3Object: { Bucket: process.env.S3_LAKE_BUCKET_NAME!, Name: s3Key },
       },
+      MaxFaces: 10, // Transact write limit
     })
     .promise();
 
@@ -83,10 +129,6 @@ const identifyFaces = async (s3Key) => {
 
   return userIds;
 };
-
-// identifyFaces('public/deeplens/fakeMall1/201912_NewYears-4856-2.JPG').then(
-//   console.log
-// );
 
 const detectMask = async (s3Key) => {
   const analysis = await rekognition
@@ -104,21 +146,17 @@ const detectMask = async (s3Key) => {
   const isMaskOff = analysis.Summary.PersonsWithoutRequiredEquipment.length > 0;
   const lowConfidences = analysis.Summary.PersonsIndeterminate.map(
     (personIdx) =>
-      analysis.Persons[personIdx].BodyParts.find(
+      analysis.Persons[personIdx].BodyParts?.find(
         (bodyPart) => bodyPart.Name === 'FACE'
-      ).EquipmentDetections[0].CoversBodyPart.Confidence
-  );
+      )?.EquipmentDetections?.[0]?.CoversBodyPart?.Confidence ?? undefined
+  ).filter((conf) => conf !== undefined);
 
   return { isMaskOff, lowConfidences };
 };
 
-// detectMask('public/deeplens/fakeMall1/WIN_20210725_21_00_21_Pro.jpg').then(
-//   console.log
-// );
-
 export const handler = async (
   event: AppSyncResolverEvent<Arguments>
-): Promise<Profile> => {
+): Promise<number> => {
   const { imageKey } = event.arguments;
 
   if (OVERRIDE_EDGE_PREDICTION) {
@@ -127,6 +165,14 @@ export const handler = async (
     if (isMaskOff) {
       const userIds = await identifyFaces(imageKey);
       console.log(`Sus KTV ppl --> ${userIds}`);
+      if (userIds.length > 0) {
+        // Only penalise users not random citizens
+        await deductGamePoints(userIds);
+        const addressors = await getAddressor(userIds);
+        await Promise.all(
+          addressors.map(({ name, email }) => sendEmail(email, name))
+        );
+      }
     }
   }
 

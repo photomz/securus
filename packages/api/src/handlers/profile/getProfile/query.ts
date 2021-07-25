@@ -22,7 +22,7 @@ export const handler = async (
               ExpressionAttributeNames: {
                 '#name': 'name',
               },
-              ProjectionExpression: `#name, pairIds${
+              ProjectionExpression: `#name, pairIds, email${
                 isMe ? ', bubbleId, faceId' : ''
               }`,
             },
@@ -59,7 +59,7 @@ export const handler = async (
     throw new Error('User does not exist');
   }
 
-  const { pairIds, name, bubbleId, faceId } = rawData![0]!.Item;
+  const { pairIds, name, bubbleId, faceId, email } = rawData![0]!.Item;
 
   const friends =
     pairIds.length === 0
@@ -98,6 +98,7 @@ export const handler = async (
     leaderboard: rawData![1]!.Item,
     arsenal: rawData![2]!.Item,
     friends,
+    email,
   };
 };
 

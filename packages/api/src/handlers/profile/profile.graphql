@@ -9,4 +9,5 @@ type Profile implements User @aws_cognito_user_pools {
   friends: [Friend!]!
   arsenal: StockRoom!
   faceId: ID
+  email: AWSEmail
 }

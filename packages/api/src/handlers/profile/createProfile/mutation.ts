@@ -1,5 +1,5 @@
 import { AppSyncResolverEvent } from 'aws-lambda';
-import { AWSURL, ID } from 'src/handlers/root.type';
+import { AWSEmail, AWSURL, ID } from 'src/handlers/root.type';
 import { docClient, rekognition } from '@libs/setup';
 import { LeaderboardDivision } from 'src/handlers/leaderboard/leaderboard.type';
 import { Avatar, avatars, powerups } from 'src/handlers/shop/shop.type';
@@ -28,7 +28,7 @@ const addFace = async (username: string, s3Key?: string): string => {
 export const handler = async (
   event: AppSyncResolverEvent<Arguments>
 ): Promise<Profile> => {
-  const { userId, name, faceIdUrl } = event.arguments;
+  const { userId, name, faceIdUrl, email } = event.arguments;
 
   const faceId = await addFace(userId, faceIdUrl);
 
@@ -67,6 +67,7 @@ export const handler = async (
       coinTotal: 0,
     },
     faceId,
+    email,
   } as Profile;
 
   await docClient
@@ -84,6 +85,7 @@ export const handler = async (
               pairIds: [],
               appealIds: [],
               faceId,
+              email,
             },
           },
         },
@@ -116,4 +118,9 @@ export const handler = async (
   return newProfile;
 };
 
-export type Arguments = { userId: ID; name: string; faceIdUrl?: AWSURL };
+export type Arguments = {
+  userId: ID;
+  name: string;
+  faceIdUrl?: AWSURL;
+  email: AWSEmail;
+};

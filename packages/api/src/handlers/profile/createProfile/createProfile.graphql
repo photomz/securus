@@ -5,6 +5,10 @@ extend type Mutation {
   # Assumes user already uploaded image via S3
   # FaceId Url defaults to userId Face ID schema in S3 bucket
 
-  createProfile(userId: ID!, name: String!, faceIdUrl: AWSURL): Profile!
-    @aws_cognito_user_pools
+  createProfile(
+    userId: ID!
+    name: String!
+    faceIdUrl: AWSURL
+    email: AWSEmail!
+  ): Profile! @aws_cognito_user_pools @aws_api_key
 }

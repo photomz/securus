@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 const { DDBTable } = require('./resources/dynamodb/stack.dev.json');
 
 process.env.DDB_TABLE_NAME = DDBTable;

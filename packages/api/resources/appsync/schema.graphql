@@ -117,8 +117,12 @@ type Mutation {
     labels: [LabelledImage!]!
   ): CrowdsourceReward! @aws_cognito_user_pools
   submitAppeal(user: InputUser!, imageUrl: AWSURL!): ID! @aws_cognito_user_pools
-  createProfile(userId: ID!, name: String!, faceIdUrl: AWSURL): Profile!
-    @aws_cognito_user_pools
+  createProfile(
+    userId: ID!
+    name: String!
+    faceIdUrl: AWSURL
+    email: AWSEmail!
+  ): Profile! @aws_cognito_user_pools @aws_api_key
   earnCoins(userId: ID!, nearCameraId: ID!): MaskOnReward!
     @aws_cognito_user_pools
   identifyCitizen(imageKey: ID!, cameraId: ID!, judgement: Boolean!): Int!
@@ -155,6 +159,7 @@ type Profile implements User @aws_cognito_user_pools {
   friends: [Friend!]!
   arsenal: StockRoom!
   faceId: ID
+  email: AWSEmail
 }
 
 type Query {
