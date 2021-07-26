@@ -2,8 +2,8 @@
   "extends": ["airbnb","airbnb/hooks","@react-native-community"],
   "root": true,
   "rules": {
-    "comma-dangle": "off",
-    "jsx-a11y/anchor-is-valid": "off",
+    "comma-dangle": 0,
+    "jsx-a11y/anchor-is-valid": 0,
     "eslint-comments/no-unlimited-disable": 0,
     "eslint-comments/no-unused-disable": 0
   }
