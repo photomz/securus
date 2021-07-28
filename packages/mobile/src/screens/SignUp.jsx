@@ -25,12 +25,10 @@ import Dialog from '../components/Dialog';
 
 export default function SignUp() {
   const [image, setImage] = useState(null);
-
-  /* prettier-ignore */
-  const [operationCancelledDialog, setOperationCancelledDialog] = useState(false);
-
-  /* prettier-ignore */
-  const [missingPermissionsDialog, setMissingPermissionsDialog] = useState(false);
+  const [operationCancelledDialog, setOperationCancelledDialog] =
+    useState(false);
+  const [missingPermissionsDialog, setMissingPermissionsDialog] =
+    useState(false);
 
   async function takeSelfie() {
     if (Constants.platform.ios) {
@@ -111,21 +109,20 @@ export default function SignUp() {
             />
           </>
         ) : (
-          /* prettier-ignore */
           <Button
             w="50%"
             mb={3}
-            startIcon={(
+            startIcon={
               <Icon
-                as={(
+                as={
                   <MaterialCommunityIcons
                     name="face-recognition"
                     color="white"
                   />
-                )}
+                }
                 size={5}
               />
-            )}
+            }
             onPress={takeSelfie}
             colorScheme="cyan"
             _text={{ color: 'white' }}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { Box } from 'native-base';
 import CardItem from '../components/CardItem';
-import Dialog from '../components/Dialog';
 
 const appeals = [
   {
@@ -34,7 +34,6 @@ const appeals = [
 
 export default function Feed() {
   const [cardCount, setCardCount] = useState(appeals.length - 1);
-  const [outOfCardsDialog, setOutOfCardsDialog] = useState(false);
 
   return (
     <>
@@ -45,7 +44,7 @@ export default function Feed() {
           onSwiped={() => {
             setCardCount(cardCount - 1);
             if (cardCount === 0) {
-              setOutOfCardsDialog(true);
+              Alert.alert('No More Images', "But here's a cookie for you 🍪");
             }
           }}
         >
@@ -56,12 +55,6 @@ export default function Feed() {
           ))}
         </CardStack>
       </Box>
-      <Dialog
-        header="No More Images"
-        body="Here's a cookie for you 🍪"
-        isOpen={outOfCardsDialog}
-        onClose={() => setOutOfCardsDialog(false)}
-      />
     </>
   );
 }

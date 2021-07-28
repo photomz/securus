@@ -50,6 +50,7 @@ const appSyncSettings = {
 const httpLink = new HttpLink({
   uri: GRAPHQL_ENDPOINT,
 });
+
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   uri: GRAPHQL_ENDPOINT,

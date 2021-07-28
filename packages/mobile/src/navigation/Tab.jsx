@@ -4,8 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import Feed from '../screens/Feed';
-import Profile from '../screens/Profile';
-import { HomePage } from './Stack';
+import Home from '../screens/Home';
+import { ProfilePage } from './Stack';
 import Leaderboard from '../screens/Leaderboard';
 
 const Tab = createBottomTabNavigator();
@@ -26,17 +26,17 @@ function Tabs() {
           } else if (route.name === 'Leaderboard') {
             iconName = focused ? 'ios-podium' : 'ios-podium-outline';
           } else if (route.name === 'Profile') {
-            iconName = 'person';
+            iconName = focused ? 'ios-person' : 'ios-person-outline';
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Feed" component={Feed} />
       <Tab.Screen name="Leaderboard" component={Leaderboard} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfilePage} />
     </Tab.Navigator>
   );
 }

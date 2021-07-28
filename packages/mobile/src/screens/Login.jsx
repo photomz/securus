@@ -50,8 +50,7 @@ export default function Login() {
         </Button>
         <HStack justifyContent="center">
           <Text fontSize="sm" color="muted.700" fontWeight={400}>
-            I&apos;m a new user.
-            {' ' /* prettier-ignore */}
+            I&apos;m a new user.{' '}
           </Text>
           <Link
             _text={{ color: 'cyan.500', bold: true, fontSize: 'sm' }}

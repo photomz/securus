@@ -1,8 +1,5 @@
 import React from 'react';
-// prettier-ignore
-import {
-  Box, HStack, Icon, Image, Stack
-} from 'native-base';
+import { Box, HStack, Icon, Image, Stack } from 'native-base';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Constants from 'expo-constants';
 // eslint-disable-next-line import/no-extraneous-dependencies

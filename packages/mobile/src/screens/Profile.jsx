@@ -1,12 +1,79 @@
-/* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Clipboard, Image } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Avatar, Button, Center, Icon, Text as TextNB } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { Auth, Storage } from 'aws-amplify';
+import { useNavigation } from '@react-navigation/native';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+
+function Home() {
+  const navigation = useNavigation();
+
+  function navigateToShop() {
+    navigation.navigate('Shop');
+  }
+
+  function navigateToFriends() {
+    navigation.navigate('Friends');
+  }
+
+  return (
+    <Center flex={1}>
+      <Avatar
+        size="2xl"
+        source={{
+          uri: 'https://i.pinimg.com/736x/43/1b/21/431b211b0f3c41da7ac1e962de725415.jpg',
+        }}
+      >
+        LG
+      </Avatar>
+      <TextNB bold fontSize="xl" mt={2}>
+        We Eat Bears
+      </TextNB>
+      <Button
+        mt={10}
+        bg="primary.400"
+        w="50%"
+        p={4}
+        rounded="xl"
+        startIcon={
+          <Icon as={<Ionicons name="ios-cart" color="white" />} size={6} />
+        }
+        onPress={navigateToShop}
+        _text={{
+          fontSize: 'md',
+          fontWeight: 'bold',
+          color: 'white',
+        }}
+      >
+        Coins: 1000
+      </Button>
+      <Button
+        mt={6}
+        bg="primary.400"
+        w="50%"
+        p={4}
+        rounded="xl"
+        startIcon={
+          <Icon as={<Ionicons name="ios-people" color="white" />} size={6} />
+        }
+        onPress={navigateToFriends}
+        _text={{
+          fontSize: 'md',
+          fontWeight: 'bold',
+          color: 'white',
+        }}
+      >
+        Friends: 10
+      </Button>
+    </Center>
+  );
+}
 
 export default function App() {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(false);
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
@@ -19,7 +86,10 @@ export default function App() {
           cameraRollStatus.status !== 'granted' ||
           cameraStatus.status !== 'granted'
         ) {
-          alert('Sorry, we need these permissions to make this work!');
+          Alert.alert(
+            'Missing Permissions',
+            'Please give us access to your camera and camera roll.'
+          );
         }
       }
     })();
@@ -44,7 +114,8 @@ export default function App() {
   const downloadImage = async (uri) => {
     try {
       const data = await Storage.get(uri);
-      setImage(data);
+      setImage(true);
+      Alert.alert('Upload Successful', 'Face ID has been set up!');
       console.log(data);
     } catch (e) {
       console.log(e);
@@ -65,7 +136,10 @@ export default function App() {
 
     try {
       if (pickerResult.cancelled) {
-        alert('Upload cancelled');
+        Alert.alert(
+          'Upload Cancelled',
+          'Please take a photo of your face for Face ID'
+        );
       } else {
         setPercentage(0);
         const img = await fetchImageFromUri(pickerResult.uri);
@@ -78,31 +152,46 @@ export default function App() {
       }
     } catch (e) {
       console.log(e);
-      alert('Upload failed');
+      Alert.alert('Upload Failed', 'Please try again later');
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Set your Face ID!</Text>
-      {percentage !== 0 && <Text style={styles.percentage}>{percentage}%</Text>}
-
-      {image && (
-        <View>
-          <Text style={styles.result}>
-            <Image
-              source={{ uri: image }}
-              style={{ width: 250, height: 250 }}
-            />
-          </Text>
-          <Text style={styles.info} onPress={() => Clipboard.setString(image)}>
-            Long press to copy the image url
-          </Text>
+    <>
+      {image ? (
+        <Home />
+      ) : (
+        <View style={styles.container}>
+          <Text style={styles.title}>Set up your Face ID!</Text>
+          {percentage !== 0 && (
+            <Text style={styles.percentage}>{percentage}%</Text>
+          )}
+          <Button
+            bg="primary.400"
+            p={4}
+            onPress={takePhoto}
+            startIcon={
+              <Icon
+                as={
+                  <MaterialCommunityIcons
+                    name="face-recognition"
+                    color="white"
+                  />
+                }
+                size={6}
+              />
+            }
+            _text={{
+              fontSize: 'md',
+              fontWeight: 'bold',
+              color: 'white',
+            }}
+          >
+            Take a Photo
+          </Button>
         </View>
       )}
-
-      <Button onPress={takePhoto} title="Take a photo" />
-    </View>
+    </>
   );
 }
 

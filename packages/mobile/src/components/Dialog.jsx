@@ -1,10 +1,7 @@
 import React from 'react';
 import { AlertDialog, Button, Center } from 'native-base';
 
-/* prettier-ignore */
-export default function Dialog({
-  header, body, isOpen, onClose
-}) {
+export default function Dialog({ header, body, isOpen, onClose }) {
   return (
     <Center>
       <AlertDialog isOpen={isOpen} onClose={onClose} motionPreset="fade">
