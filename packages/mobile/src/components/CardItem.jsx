@@ -11,7 +11,7 @@ export default function CardItem({ imageURI }) {
   else if (Constants.platform.android) marginTop = '20%';
 
   return (
-    <Box bg="white" shadow={2} rounded="lg" mt={marginTop} mx="14.25%">
+    <Box bg="white" shadow={2} rounded="lg" mt={marginTop} mx="auto">
       <Image
         source={{
           uri: imageURI,

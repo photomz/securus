@@ -10,7 +10,6 @@ export default function Leaderboard() {
 
   if (error) return <Text>Error: {error.message}</Text>;
   if (loading) return <Text>Loading....</Text>;
-
   return (
     <SafeAreaView style={tailwind('h-full')}>
       <View style={tailwind('pt-12 items-center')}>
