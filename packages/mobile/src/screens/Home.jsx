@@ -47,7 +47,7 @@ export default function Home() {
             showsMyLocationButton
             showsCompass
           >
-            <Marker coordinate={DEEPLENS_LOCATION} title="DeepLens Location" />
+            <Marker coordinate={DEEPLENS_LOCATION} title="SafeStop" />
           </MapView>
         </View>
       ) : (
