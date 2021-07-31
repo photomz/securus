@@ -7,11 +7,11 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function CardItem({ imageURI }) {
   let marginTop;
-  if (Constants.platform.ios) marginTop = '30%';
-  else if (Constants.platform.android) marginTop = '20%';
+  if (Constants.platform.ios) marginTop = '33%';
+  else if (Constants.platform.android) marginTop = '22%';
 
   return (
-    <Box bg="white" shadow={2} rounded="lg" mt={marginTop} mx="auto">
+    <Box bg="white" shadow={2} rounded="lg" mt={marginTop} ml="17%">
       <Image
         source={{
           uri: imageURI,
@@ -19,10 +19,10 @@ export default function CardItem({ imageURI }) {
         alt="Incriminating image"
         resizeMode="cover"
         roundedTop="md"
-        h="500px"
+        h="550px"
       />
       <Stack alignItems="center">
-        <HStack my={6} space={10} alignItems="center">
+        <HStack my={8} space={10} alignItems="center">
           <Icon
             as={<Ionicons name="ios-close-circle" />}
             color="red"
