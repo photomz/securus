@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 import { Avatar, Button, Center, Icon, Text as TextNB } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
@@ -72,7 +72,7 @@ function Home() {
   );
 }
 
-export default function App() {
+export default function Profile() {
   const [image, setImage] = useState(false);
   const [percentage, setPercentage] = useState(0);
 
@@ -88,7 +88,7 @@ export default function App() {
         ) {
           Alert.alert(
             'Missing Permissions',
-            'Please give us access to your camera and camera roll.'
+            'Please give us access to your camera and camera roll to proceed.'
           );
         }
       }
