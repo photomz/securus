@@ -41,8 +41,7 @@ export default function Home() {
         <View style={styles.container}>
           <MapView
             provider="google"
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={{ alignSelf: 'stretch', height: '100%' }}
+            style={styles.map}
             region={mapRegion}
             showsUserLocation
             showsMyLocationButton
@@ -65,5 +64,9 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  map: {
+    alignSelf: 'stretch',
+    height: '100%',
   },
 });
