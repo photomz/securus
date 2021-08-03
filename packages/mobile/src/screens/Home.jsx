@@ -3,6 +3,7 @@ import { Alert, View, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Center, Text } from 'native-base';
+import SafeStop from '../assets/misc/safestop.png';
 
 const DEEPLENS_LOCATION = {
   latitude: 1.311423,
@@ -98,9 +99,8 @@ export default function Home() {
             <Marker
               coordinate={DEEPLENS_LOCATION}
               title="Rail Corridor"
-              image={{
-                uri: 'https://cdn.discordapp.com/attachments/851355229626695703/870927799299485726/188929.png',
-              }}
+              // eslint-disable-next-line global-require
+              image={SafeStop}
             />
           </MapView>
         </View>

@@ -1,6 +1,10 @@
 import React from 'react';
-import { Text } from 'native-base';
+import { Center, Heading } from 'native-base';
 
 export default function Friends() {
-  return <Text>Friends</Text>;
+  return (
+    <Center>
+      <Heading>Friends: 10</Heading>
+    </Center>
+  );
 }

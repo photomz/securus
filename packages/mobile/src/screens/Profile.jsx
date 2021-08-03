@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
-import { Avatar, Button, Center, Icon, Text as TextNB } from 'native-base';
+import { Button, Center, Icon, Image, Text as TextNB } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { Auth, Storage } from 'aws-amplify';
 import { useNavigation } from '@react-navigation/native';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AWSEngineer from '../assets/avatars/aws-engineer.png';
+import Coins from '../assets/misc/coins.png';
+import Friends from '../assets/misc/friends.png';
 
 function Home() {
   const navigation = useNavigation();
@@ -21,16 +24,9 @@ function Home() {
 
   return (
     <Center flex={1}>
-      <Avatar
-        size="2xl"
-        source={{
-          uri: 'https://i.pinimg.com/736x/43/1b/21/431b211b0f3c41da7ac1e962de725415.jpg',
-        }}
-      >
-        LG
-      </Avatar>
-      <TextNB bold fontSize="xl" mt={2}>
-        We Eat Bears
+      <Image size={180} source={AWSEngineer} mb={2} />
+      <TextNB bold fontSize="2xl" mt={2}>
+        le gandee 🥸
       </TextNB>
       <Button
         mt={10}
@@ -38,12 +34,10 @@ function Home() {
         w="50%"
         p={4}
         rounded="xl"
-        startIcon={
-          <Icon as={<Ionicons name="ios-cart" color="white" />} size={6} />
-        }
+        startIcon={<Image size={8} source={Coins} mr={2} />}
         onPress={navigateToShop}
         _text={{
-          fontSize: 'md',
+          fontSize: 20,
           fontWeight: 'bold',
           color: 'white',
         }}
@@ -56,12 +50,10 @@ function Home() {
         w="50%"
         p={4}
         rounded="xl"
-        startIcon={
-          <Icon as={<Ionicons name="ios-people" color="white" />} size={6} />
-        }
+        startIcon={<Image size={8} source={Friends} mr={2} />}
         onPress={navigateToFriends}
         _text={{
-          fontSize: 'md',
+          fontSize: 20,
           fontWeight: 'bold',
           color: 'white',
         }}
