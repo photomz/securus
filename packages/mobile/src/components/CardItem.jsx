@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, HStack, Icon, Image, Stack } from 'native-base';
+import { Box, HStack, Image, Stack } from 'native-base';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Constants from 'expo-constants';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Ionicons } from '@expo/vector-icons';
+import Nah from '../assets/misc/nah.png';
+import Yay from '../assets/misc/yay.png';
 
 export default function CardItem({ imageURI }) {
   let marginTop;
@@ -11,7 +11,7 @@ export default function CardItem({ imageURI }) {
   else if (Constants.platform.android) marginTop = '22%';
 
   return (
-    <Box bg="white" shadow={2} rounded="lg" mt={marginTop} ml="17%">
+    <Box bg="white" shadow={2} rounded="lg" mt={marginTop} ml="15.5%">
       <Image
         source={{
           uri: imageURI,
@@ -23,18 +23,20 @@ export default function CardItem({ imageURI }) {
       />
       <Stack alignItems="center">
         <HStack my={8} space={10} alignItems="center">
-          <Icon
+          <Image source={Nah} size={12} mx={10} />
+          <Image source={Yay} size={12} mx={10} />
+          {/* <Icon
             as={<Ionicons name="ios-close-circle" />}
             color="red"
             size={10}
             mx={10}
-          />
-          <Icon
+          /> */}
+          {/* <Icon
             as={<Ionicons name="ios-checkmark-circle" />}
             color="green"
             size={10}
             mx={10}
-          />
+          /> */}
         </HStack>
       </Stack>
     </Box>
