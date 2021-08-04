@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./src/assets/expo/icon.png",
     "splash": {
-      "image": "./src/assets/expo/splash.png",
+      "image": "./src/assets/expo/securus-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

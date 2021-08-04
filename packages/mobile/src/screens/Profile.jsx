@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AWSEngineer from '../assets/avatars/aws-engineer.png';
 import Coins from '../assets/misc/coins.png';
-import Friends from '../assets/misc/friends.png';
+import Friends from '../assets/friends/friends.png';
 
 function Home() {
   const navigation = useNavigation();
