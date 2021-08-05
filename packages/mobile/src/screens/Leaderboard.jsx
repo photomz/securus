@@ -1,11 +1,13 @@
 import React from 'react';
 import { Button, HStack, Image, Text, ScrollView, Spacer } from 'native-base';
+import { gql, useQuery } from '@apollo/client';
 import Artist from '../assets/avatars/artist.png';
 import AWSEngineer from '../assets/avatars/aws-engineer.png';
 import AzureEngineer from '../assets/avatars/azure-engineer.png';
 import SafeDistancingAmbassador from '../assets/avatars/safe-distancing-ambassador.png';
 import Youtuber from '../assets/avatars/youtuber.png';
 import Coins from '../assets/misc/coins.png';
+import { getLeaderboardTop as GET_LEADERBOARD_TOP } from '../graphql/queries';
 
 const players = [
   { name: 'Securus :^)', avatar: 'AWS_ENGINEER', coins: 69421 },
@@ -36,6 +38,19 @@ export default function Leaderboard() {
     }
   }
 
+  const { data, loading, error } = useQuery(gql(GET_LEADERBOARD_TOP));
+
+  if (error) {
+    return (
+      <Text>
+        Error: {error.message} {error.extraInfo}
+      </Text>
+    );
+  }
+  if (loading) return <Text>Loading....</Text>;
+
+  console.log(data);
+
   return (
     <ScrollView pt={15} mt={10}>
       {players.map((player, idx) => {
@@ -50,7 +65,7 @@ export default function Leaderboard() {
           >
             <Image source={getAvatar(player.avatar)} size="xs" mr={5} />
             <Text color="muted.700" fontSize="xl" fontWeight="500">
-              {player.name}
+              {player.name} HI
             </Text>
             <Spacer />
             <Button startIcon={<Image source={Coins} size={3} />}>
