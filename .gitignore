@@ -90,3 +90,4 @@ build/
 # Custom
 .env.*
 .webpack
+fakelens/.cache

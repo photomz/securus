@@ -1,13 +1,32 @@
 import React, { useEffect, useRef } from 'react';
 import tw from 'twin.macro';
+import { withAuthenticator } from 'aws-amplify-react';
+import { Storage } from 'aws-amplify';
+import fetch from 'isomorphic-fetch';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import SEO from '../components/seo';
+
+const IDENTIFY_CITIZEN = gql`
+  mutation IdentifyCitizen(
+    $imageKey: ID!
+    $cameraId: ID!
+    $judgement: Boolean!
+  ) {
+    identifyCitizen(
+      imageKey: $imageKey
+      cameraId: $cameraId
+      judgement: $judgement
+    )
+  }
+`;
 
 const Landing = ({ location }: { location: Record<string, any> }) => {
   const canvas = useRef();
+  const [callLambda, { data, loading, error }] = useMutation(IDENTIFY_CITIZEN);
 
   const blobToURL = (img) => {
-    canvas.current.width = img.width;
-    canvas.current.height = img.height;
+    canvas.current.width = img.width ?? 0;
+    canvas.current.height = img.height ?? 0;
     canvas.current
       .getContext('2d')
       .clearRect(0, 0, canvas.width, canvas.height);
@@ -28,9 +47,40 @@ const Landing = ({ location }: { location: Record<string, any> }) => {
     }
   };
 
-  const onInterval = async (imageCapture) => {
+  const fetchImageFromUri = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    return blob;
+  };
+
+  const uploadImage = async (filename, img) => {
+    try {
+      const data = await Storage.put(filename, img, {
+        level: 'public',
+        contentType: 'image/jpeg',
+      });
+      return data.key;
+    } catch (e) {
+      console.log(e);
+      return e.response;
+    }
+  };
+
+  const processFrame = async (imageCapture) => {
     const blob = await captureShot(imageCapture);
-    const url = await blobToURL(blob);
+    if (blob) {
+      const url = await blobToURL(blob);
+      const newBlob = await fetchImageFromUri(url);
+      const key = `deeplens/fakeMall1/${Date.now()}.jpg`;
+      await uploadImage(key, newBlob);
+      await callLambda({
+        variables: {
+          imageKey: `public/${key}`,
+          cameraId: 'fakelens-1',
+          judgement: true,
+        },
+      });
+    }
   };
 
   useEffect(() => {
@@ -40,9 +90,12 @@ const Landing = ({ location }: { location: Record<string, any> }) => {
       });
       const track = stream.getVideoTracks()[0];
       const imageCapture = new ImageCapture(track);
-      setInterval(() => onInterval(imageCapture), 2000);
+      setInterval(() => processFrame(imageCapture), 2000);
     })();
   }, []);
+
+  if (error) return <p>Error: {error.message}</p>;
+  if (data) console.log(data);
 
   return (
     <>
@@ -60,4 +113,4 @@ const Landing = ({ location }: { location: Record<string, any> }) => {
   );
 };
 
-export default Landing;
+export default withAuthenticator(Landing);
