@@ -1,0 +1,35 @@
+{
+  "plugins": [
+    "babel-plugin-twin",
+    "babel-plugin-macros",
+    "babel-plugin-styled-components",
+    [
+      "babel-plugin-import",
+      {
+        "libraryName": "@material-ui/core",
+        "libraryDirectory": "esm",
+        "camel2DashComponentName": false
+      },
+      "core"
+    ],
+    [
+      "babel-plugin-transform-imports",
+      {
+        "@material-ui/core/esm": {
+          "transform": "@material-ui/core/esm/${member}",
+          "preventFullImport": true
+        }
+      }
+    ]
+  ],
+  "presets": [
+    [
+      "babel-preset-gatsby",
+      {
+        "targets": {
+          "browsers": [">0.25%", "not dead"]
+        }
+      }
+    ]
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "build",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "noEmitOnError": false,
+    "importHelpers": true,
+    "lib": ["ESNext", "DOM"],
+    "types": ["@types/jest"],
+    "module": "commonjs",
+    "preserveSymlinks": true,
+    "typeRoots": ["./node_modules/@types"],
+    "downlevelIteration": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"],
+  "exclude": ["node_modules"]
+}
