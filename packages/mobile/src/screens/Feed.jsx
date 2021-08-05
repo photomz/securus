@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { Box } from 'native-base';
-import CardItem from '../components/CardItem';
+import CardItem from '../components/TinderCard';
 
 const appeals = [
   {
