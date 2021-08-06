@@ -16,6 +16,8 @@ import Amplify, { Auth, Analytics } from 'aws-amplify';
 
 import Tabs from './src/navigation/Tab';
 
+console.disableYellowBox = true; // disable warnings for demo
+
 const GRAPHQL_ENDPOINT =
   'https://fympi4jhonhwhi5fncqj7qsde4.appsync-api.ap-southeast-1.amazonaws.com/graphql';
 const REGION = 'ap-southeast-1';

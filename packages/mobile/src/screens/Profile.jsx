@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AWSEngineer from '../assets/avatars/aws-engineer.png';
+import AzureEngineer from '../assets/avatars/azure-engineer.png';
 import Coins from '../assets/misc/coins.png';
 import Friends from '../assets/friends/friends.png';
 
@@ -42,7 +43,7 @@ function Home() {
           color: 'white',
         }}
       >
-        Coins: 1000
+        Coins: 50
       </Button>
       <Button
         mt={6}
@@ -58,7 +59,7 @@ function Home() {
           color: 'white',
         }}
       >
-        Friends: 10
+        Friends: 5
       </Button>
     </Center>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import {
   Button,
   HStack,
@@ -48,16 +49,20 @@ export default function Friends() {
         variant="filled"
         InputRightElement={
           <Button
-            startIcon={
-              <Image
-                source={FriendSearch}
-                size="xs"
-                onPress={() => {
-                  // addFriend(inputValue);
-                  setInputValue('');
-                }}
-              />
-            }
+            startIcon={<Image source={FriendSearch} size="xs" />}
+            onPress={() => {
+              console.log(inputValue);
+              if (inputValue === 'Securus :^)') {
+                Alert.alert(
+                  'Success!',
+                  'Successfully made friends with Securus :^).'
+                );
+                friends.push({ name: 'Securus :^)', avatar: 'AWS_ENGINEER' });
+              } else {
+                Alert.alert('Error :(', `User "${inputValue}" not found.`);
+              }
+              setInputValue('');
+            }}
           />
         }
         onChangeText={(v) => setInputValue(v)}

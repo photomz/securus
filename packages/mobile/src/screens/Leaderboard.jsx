@@ -37,7 +37,7 @@ export default function Leaderboard() {
   }
 
   return (
-    <ScrollView pt={15} mt={10}>
+    <ScrollView pt={15} mt={10} mx={3}>
       {players.map((player, idx) => {
         return (
           <HStack
@@ -46,14 +46,16 @@ export default function Leaderboard() {
             key={idx.toString()}
             px={3}
             my={2}
-            shadow={7}
           >
+            <Text fontSize="2xl" fontWeight="600" mr={3}>
+              {idx + 1}.
+            </Text>
             <Image source={getAvatar(player.avatar)} size="xs" mr={5} />
             <Text color="muted.700" fontSize="xl" fontWeight="500">
               {player.name}
             </Text>
             <Spacer />
-            <Button startIcon={<Image source={Coins} size={3} />}>
+            <Button shadow={7} startIcon={<Image source={Coins} size={3} />}>
               <Text>{player.coins}</Text>
             </Button>
           </HStack>
