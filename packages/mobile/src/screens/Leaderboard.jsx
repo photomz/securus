@@ -1,11 +1,22 @@
 import React from 'react';
-import { Button, HStack, Image, Text, ScrollView, Spacer } from 'native-base';
-import Artist from '../assets/avatars/artist.png';
-import AWSEngineer from '../assets/avatars/aws-engineer.png';
-import AzureEngineer from '../assets/avatars/azure-engineer.png';
-import SafeDistancingAmbassador from '../assets/avatars/safe-distancing-ambassador.png';
-import Youtuber from '../assets/avatars/youtuber.png';
-import Coins from '../assets/misc/coins.png';
+import {
+  Button,
+  Center,
+  HStack,
+  Image,
+  Text,
+  ScrollView,
+  Spacer,
+} from 'native-base';
+import Constants from 'expo-constants';
+import {
+  Artist,
+  AWSEngineer,
+  AzureEngineer,
+  SafeDistancingAmbassador,
+  Youtuber,
+  Coins,
+} from '../assets';
 
 const players = [
   { name: 'Securus :^)', avatar: 'AWS_ENGINEER', coins: 69421 },
@@ -21,6 +32,13 @@ const players = [
 ];
 
 export default function Leaderboard() {
+  let mt;
+  if (Constants.platform.web) {
+    mt = 3;
+  } else {
+    mt = 10;
+  }
+
   function getAvatar(avatar) {
     switch (avatar) {
       case 'ARTIST':
@@ -37,7 +55,7 @@ export default function Leaderboard() {
   }
 
   return (
-    <ScrollView pt={15} mt={10}>
+    <ScrollView pt={15} mt={mt} mx={3}>
       {players.map((player, idx) => {
         return (
           <HStack
@@ -46,14 +64,16 @@ export default function Leaderboard() {
             key={idx.toString()}
             px={3}
             my={2}
-            shadow={7}
           >
+            <Text fontSize="2xl" fontWeight="600" mr={3}>
+              {idx + 1}.
+            </Text>
             <Image source={getAvatar(player.avatar)} size="xs" mr={5} />
             <Text color="muted.700" fontSize="xl" fontWeight="500">
               {player.name}
             </Text>
             <Spacer />
-            <Button startIcon={<Image source={Coins} size={3} />}>
+            <Button shadow={7} startIcon={<Image source={Coins} size={3} />}>
               <Text>{player.coins}</Text>
             </Button>
           </HStack>

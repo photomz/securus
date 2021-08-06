@@ -9,13 +9,15 @@ import {
   ScrollView,
   Spacer,
 } from 'native-base';
-import FriendSearch from '../assets/friends/friend-search.png';
-import SelectFriend from '../assets/friends/select-friend.png';
-import Artist from '../assets/avatars/artist.png';
-import AWSEngineer from '../assets/avatars/aws-engineer.png';
-import AzureEngineer from '../assets/avatars/azure-engineer.png';
-import SafeDistancingAmbassador from '../assets/avatars/safe-distancing-ambassador.png';
-import Youtuber from '../assets/avatars/youtuber.png';
+import {
+  FriendSearch,
+  SelectFriend,
+  Artist,
+  AWSEngineer,
+  AzureEngineer,
+  SafeDistancingAmbassador,
+  Youtuber,
+} from '../assets';
 
 const friends = [
   { name: 'Sugandi', avatar: 'AZURE_ENGINEER' },
@@ -50,7 +52,7 @@ export default function Friends() {
           <Button
             startIcon={
               <Image
-                source={FriendSearch}
+                source={{ uri: FriendSearch }}
                 size="xs"
                 onPress={() => {
                   // addFriend(inputValue);
@@ -75,13 +77,17 @@ export default function Friends() {
               px={3}
               my={2}
             >
-              <Image source={getAvatar(friend.avatar)} size="sm" mr={5} />
+              <Image
+                source={{ uri: getAvatar(friend.avatar) }}
+                size="sm"
+                mr={5}
+              />
               <Text color="muted.700" fontSize="xl" fontWeight="500">
                 {friend.name}
               </Text>
               <Spacer />
               <Pressable>
-                <Image source={SelectFriend} size="xs" />
+                <Image source={{ uri: SelectFriend }} size="xs" />
               </Pressable>
             </HStack>
           );

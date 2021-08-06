@@ -3,14 +3,7 @@ import { Alert } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { Box } from 'native-base';
 import CardItem from '../components/TinderCard';
-import A from '../assets/maskCAPTCHA/a.jpg';
-import B from '../assets/maskCAPTCHA/b.jpg';
-import C from '../assets/maskCAPTCHA/c.jpg';
-import D from '../assets/maskCAPTCHA/d.jpg';
-import E from '../assets/maskCAPTCHA/e.jpg';
-import F from '../assets/maskCAPTCHA/f.jpg';
-import G from '../assets/maskCAPTCHA/g.jpg';
-import H from '../assets/maskCAPTCHA/h.jpg';
+import { A, B, C, D, E, F, G, H } from '../assets';
 
 const appeals = [
   { id: 0, image: A },

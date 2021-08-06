@@ -7,9 +7,7 @@ import { Auth, Storage } from 'aws-amplify';
 import { useNavigation } from '@react-navigation/native';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AWSEngineer from '../assets/avatars/aws-engineer.png';
-import Coins from '../assets/misc/coins.png';
-import Friends from '../assets/friends/friends.png';
+import { AWSEngineer, Coins, Friends } from '../assets';
 
 function Home() {
   const navigation = useNavigation();
@@ -24,7 +22,7 @@ function Home() {
 
   return (
     <Center flex={1}>
-      <Image size={180} source={AWSEngineer} mb={2} />
+      <Image size={180} source={{ uri: AWSEngineer }} mb={2} />
       <TextNB bold fontSize="2xl" mt={2}>
         le gandee 🥸
       </TextNB>

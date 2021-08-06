@@ -30,7 +30,12 @@ export default function CardComponent({ image, name, price }) {
       maxWidth={230}
       mr={3}
     >
-      <Image source={image} resizeMode="cover" height={230} roundedTop="md" />
+      <Image
+        source={{ uri: image }}
+        resizeMode="cover"
+        height={230}
+        roundedTop="md"
+      />
       <Stack space={4} p={[4, 4, 8]}>
         <Heading size={['md', 'lg', 'md']} noOfLines={2}>
           {name}
