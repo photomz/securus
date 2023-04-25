@@ -1,5 +1,4 @@
-![Securus logo](./assets/securus_logo.png)
-# Securus: AI Social Game for Wearing COVID-19 Masks
+# 🛡️ Securus: AI Social Game for Wearing COVID-19 Masks
 
 [Pitch deck 🔗](https://docs.google.com/presentation/d/1MAIT52MFhbN1uX9XmmIQg3aqlcEUnv7L/edit?usp=sharing&ouid=103478900344753254228&rtpof=true&sd=true) | [Whitepaper 🔗](https://docs.google.com/document/d/1NidxNuTBACGBXKFHXwR474I43ZVp3MI-/edit?usp=sharing&ouid=103478900344753254228&rtpof=true&sd=true)
 
