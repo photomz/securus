@@ -49,6 +49,6 @@ Our gamification features (leaderboards, point systems, group streaks) incentivi
 
 🚀 By combining mask compliance gamification and AI-driven detection, Securus aims to create a safer and more resilient environment amidst the COVID-19 pandemic.
 
-Licensing: MIT
+License: **MIT**
 
 Credit: to my teammates at AWS BuildOn 2021 Hackathon, where we **won 1st across Southeast Asia**! (Nicole Chay, Jamie Wee, Lachlan Goh, Matthew Han)
